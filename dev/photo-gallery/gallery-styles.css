@@ -9,6 +9,12 @@
   text-align: center;
 }
 
+.gallery-thumbnails img {
+  height: 75px;
+  margin-right: 5px;
+  width: auto;
+}
+
 .gallery-thumbnails img:hover {
   cursor: pointer;
   opacity: .4;
@@ -16,12 +22,6 @@
 
 .gallery-thumbnails {
   text-align: center;
-}
-
-.gallery-thumbnails img {
-  height: 75px;
-  margin-right: 5px;
-  width: auto;
 }
 
 .gallery-thumbnails img.selected {
@@ -182,11 +182,11 @@
 }
 
 .gallery-scroll.previous {
-  left: 5%;
+  left: 25%;
 }
 
 .gallery-scroll.next {
-  right: 5%;
+  right: 25%;
 }
 
 .lightbox .gallery-scroll {

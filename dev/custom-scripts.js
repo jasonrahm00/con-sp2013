@@ -24,20 +24,10 @@ $(document).ready(function() {
         backdrop = '<div class="backdrop"></div>',
         fadeTimerShort = 250,
         fadeTimerMedium = 500,
-        imageUrls = $('.gallery-thumbnails>ul>li'),
+        firstImage = $('.gallery-thumbnails img')[0];
         lightboxClose = '<span class="lightbox-close">X</span>',
         lightboxOpen = false,
         overlay = '<div class="overlay"></div>';
-    
-    $('.gallery-thumbnails div').html('');
-    
-    $.each(imageUrls, function(index, value) {
-      var imageThumb = "<img src='" + value.textContent + "'>";
-      $('.gallery-thumbnails div').append(imageThumb);
-    });
-
-    var firstImage = $('.gallery-thumbnails img')[0];
-    $('.gallery-thumbnails ul').addClass('hidden');
       
     //Called in the setImage function If image has alt text, use that as a caption, else no caption shows
     function getCaption(y) {
