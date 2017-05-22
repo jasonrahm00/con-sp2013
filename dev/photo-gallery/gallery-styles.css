@@ -18,6 +18,12 @@
   text-align: center;
 }
 
+.gallery-thumbnails img {
+  height: 75px;
+  margin-right: 5px;
+  width: auto;
+}
+
 .gallery-thumbnails img.selected {
   opacity: .4;
 }
@@ -39,6 +45,11 @@
 
 .preview-wrapper figure {
   margin: 0;
+}
+
+.preview-wrapper figure img {
+  max-height: 350px;
+  width: auto;
 }
 
 .view-full-image {
@@ -69,12 +80,12 @@
 .lightbox>div {
   align-items: center;
   display: flex;
-  height: 640px;
+  height: 800px;
   justify-content: center;
   left: 25%;
   position: fixed;
-  top: 15%;
-  width: 950px;
+  top: 5%;
+  width: 1050px;
   z-index: 10000;
 }
 

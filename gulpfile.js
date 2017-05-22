@@ -18,7 +18,7 @@ gulp.task('clean:dist', function() {
 });
 
 gulp.task('minify-css', function() {
-  return gulp.src(['dev/styles.css'])
+  return gulp.src(['dev/styles.css', 'dev/photo-gallery/*.css'])
     .pipe(concatCss('univ-intranet-seattle.css'))
     .pipe(cssnano())
     .pipe(gulp.dest('dist'));
@@ -26,6 +26,7 @@ gulp.task('minify-css', function() {
 
 gulp.task('compile-widgets', function() {
   return gulp.src(['dev/photo-gallery/*.js'])
+    .pipe(uglify())
     .pipe(rename('custom-widgets.js'))
     .pipe(gulp.dest('dist'))
 });

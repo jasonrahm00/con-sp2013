@@ -9,16 +9,26 @@ $(document).ready(function() {
   if(photoGallery.length === 0) {
     return;
   } else {
-    var caption, currentThumb, selectedIndex, selectedFull, selectedPre, selectedThumb;
-    var captionSetting = $('.photo-gallery').attr('data-caption');
-    var backdrop = '<div class="backdrop"></div>';
-    var firstImage = $('.gallery-thumbnails img')[0];
-    var fadeTimerShort = 250;
-    var fadeTimerMedium = 500;
-    var overlay = '<div class="overlay"></div>';
-    var lightboxClose = '<span class="lightbox-close">X</span>';
-    var lightboxOpen = false;
+    var caption, currentThumb, selectedIndex, selectedFull, selectedPre, selectedThumb,
+        captionSetting = $('.photo-gallery').attr('data-caption'),
+        backdrop = '<div class="backdrop"></div>',
+        fadeTimerShort = 250,
+        fadeTimerMedium = 500,
+        imageUrls = $('.gallery-thumbnails>ul>li'),
+        lightboxClose = '<span class="lightbox-close">X</span>',
+        lightboxOpen = false,
+        overlay = '<div class="overlay"></div>';
+    
+    $('.gallery-thumbnails div').html('');
+    
+    $.each(imageUrls, function(index, value) {
+      var imageThumb = "<img src='" + value.textContent + "'>";
+      $('.gallery-thumbnails div').append(imageThumb);
+    });
 
+    var firstImage = $('.gallery-thumbnails img')[0];
+    $('.gallery-thumbnails ul').addClass('hidden');
+      
     //Called in the setImage function If image has alt text, use that as a caption, else no caption shows
     function getCaption(y) {
       if(captionSetting !== 'on') {
@@ -72,7 +82,7 @@ $(document).ready(function() {
 
     //Place selected image preview and full versions in their respective containers  
     function placeImage() {
-      $('.preview-image').html('<figure><img alt ="Image preview" src="' + selectedPre + '">' + caption + '</figure><span class="view-full-image"><img alt="Magnifying glass icon" src="/PublishingImages/UCDLayoutImages/searchButton.png"></span>');    
+      $('.preview-image').html('<figure><img alt ="Image preview" src="' + selectedPre + '">' + caption + '</figure><span class="view-full-image"><img alt="Magnifying glass icon" src="/SiteCollectionImages/magnify-glass-icon.png"></span>');    
       $('.lightbox-content').html('<img alt ="" src="' + selectedFull + '">' + lightboxClose);
 
       //Add click event to the lightbox-close button whenever the image changes
@@ -144,6 +154,7 @@ $(document).ready(function() {
         closeLightbox();
       }
     });
+
   }
 
 });
