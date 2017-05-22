@@ -23,3 +23,9 @@ gulp.task('minify-css', function() {
     .pipe(cssnano())
     .pipe(gulp.dest('dist'));
 });
+
+gulp.task('compile-widgets', function() {
+  return gulp.src(['dev/photo-gallery/*.js'])
+    .pipe(rename('custom-widgets.js'))
+    .pipe(gulp.dest('dist'))
+});
