@@ -198,6 +198,15 @@ select#homeRootMenu {
                Custom SharePoint Overrides
 
 **********************************************************/
+
+#sideNavBox .ms-core-listMenu-root li.static ul.static {
+  display: none;
+}
+
+#sideNavBox .ms-core-listMenu-root li.static:hover {
+  cursor: pointer;
+}
+
 .ms-core-overlay {
   background-color: #fff;
 }

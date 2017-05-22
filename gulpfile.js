@@ -24,9 +24,12 @@ gulp.task('minify-css', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('compile-widgets', function() {
-  return gulp.src(['dev/photo-gallery/*.js'])
+gulp.task('minify-js', function() {
+  return gulp.src(['dev/custom-scripts.js'])
     .pipe(uglify())
-    .pipe(rename('custom-widgets.js'))
     .pipe(gulp.dest('dist'))
+});
+
+gulp.task('compile', function(callback) {
+  runSequence('clean:dist', ['minify-css', 'minify-js'], callback);
 });
