@@ -3,12 +3,14 @@ $(document).ready(function() {
   /**************************************************************************
                     Custom Side Nav Accordion Functionality
   **************************************************************************/
-
+  
   if(window.location.href.indexOf('pulse') > -1) {
     $('#sideNavBox .ms-core-listMenu-root li.static ul.static').parent().click(function() {
       $(this).find('ul.static').slideToggle();        
     });
   }
+  
+  
     
   /**************************************************************************
                     Custom Photo Gallery ~jrahm
