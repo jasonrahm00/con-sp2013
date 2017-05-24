@@ -35,7 +35,7 @@ h2.ms-rteElemnet-H2,
 
 h3 {
   color: #531111;
-  line-height: 120%;
+  font-weight:bold;
 }
 
 section {
@@ -86,6 +86,11 @@ section:first-child {
 .clearfix {
 *zoom: 1;
 }
+
+#contentBox {
+  margin-left: 280px;
+}
+
 #contentRow:before, #contentRow:after {
   content: "";
   display: table;
@@ -94,7 +99,8 @@ section:first-child {
   clear: both;
 }
 #contentRow {
-  *zoom: 1;
+  margin: 0 2rem;
+  padding-top: 0;
 }
 
 
@@ -179,10 +185,6 @@ body.univ-intranet-mysite #contentRow {
   background-color: #4c4c4c;
   color: #fff;
 }
-/*** Global Menu ***/
-.ms-core-listMenu-item:hover {
-  color: #003366;
-}
 
 /*** Drop-down select menu ***/
 
@@ -208,26 +210,6 @@ select#homeRootMenu {
   font-weight: 100;
 }
 
-/** Global Vav **/
-#DeltaTopNavigation .dynamic-children .dynamic {
-  list-style-type: none;
-}
-
-#DeltaTopNavigation .dynamic-children .dynamic a {
-  display: block;
-  padding: .85rem;
-}
-
-#DeltaTopNavigation .dynamic-children .dynamic a:hover {
-  background: #cfb87c;
-}
-
-#DeltaTopNavigation .dynamic-children ul.dynamic {
-  background-color: #d9d9d9;
-  border: none;
-  box-shadow: none;
-  width: 225px !important;
-}
 
 /** suite bar color override -- a special filter is applied by SP for ie8, turning the suite bar transparent. This is a bug **/
 #univ-intranet-seattle .ms-core-needIEFilter #suiteBarLeft {
@@ -243,12 +225,60 @@ select#homeRootMenu {
 }
 
 
-
 /**********************************************************
     
-               Custom SharePoint Overrides
+               Custom Navigation
 
 **********************************************************/
+
+/******************** Main Nav ********************/
+
+nav {
+  margin-left: 80px;
+  padding: 1rem;
+}
+
+nav .ms-core-listMenu-root>li.static>ul>li {
+  font-size: .9rem;
+} 
+
+#DeltaTopNavigation .dynamic-children ul.dynamic {
+  border: 1px solid #ddd;
+  box-shadow: none;
+  width: 225px !important;
+}
+
+.ms-core-listMenu-item:hover,
+.ms-core-listMenu-horizontalBox a.ms-core-listMenu-item:hover,
+#sideNavBox a:hover {
+  color: #000;
+}
+
+#DeltaTopNavigation .dynamic-children .dynamic {
+  list-style-type: none;
+}
+
+#DeltaTopNavigation .dynamic-children .dynamic a {
+  display: block;
+  padding: .85rem;
+}
+
+#DeltaTopNavigation .dynamic-children .dynamic a:hover {
+  background: #cfb87c;
+}
+
+
+
+/******************** Side Nav ********************/
+
+#sideNavBox {
+  margin-top: .85rem;
+}
+
+#sideNavBox li>a.ms-core-listMenu-item:hover,
+#sideNavBox li span.ms-core-listMenu-item:hover {
+  background-color: #cfb87c;
+}
 
 #sideNavBox .ms-core-listMenu-root li.static ul.static {
   display: none;
@@ -257,6 +287,14 @@ select#homeRootMenu {
 #sideNavBox .ms-core-listMenu-root li.static:hover {
   cursor: pointer;
 }
+
+
+
+/**********************************************************
+    
+               Custom SharePoint Overrides
+
+**********************************************************/
 
 li.static:focus,
 li.static span:focus,
@@ -273,8 +311,16 @@ li.static span:focus,
   border: 0;
 }
 
+li.ms-navedit-editArea {
+  display: none !important;
+}
+
 .tableCol-50 {
   vertical-align: top;
+}
+
+#pageTitle {
+  margin-bottom: 2rem;
 }
 
 

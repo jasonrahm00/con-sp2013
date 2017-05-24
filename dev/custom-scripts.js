@@ -9,18 +9,18 @@ $(document).ready(function() {
     if('#sideNavBox .ms-core-listMenu-root li.static ul.static li.selected') {
       var activeSideNavLink = $('#sideNavBox .ms-core-listMenu-root li.static ul.static li.static.selected');
       $(activeSideNavLink).parent().css('display', 'block');
-      $(activeSideNavLink).parent().parent().addClass('active-menu');
+      $(activeSideNavLink).parent().prev().addClass('active-menu');
     }
 
-    $('#sideNavBox ul.ms-core-listMenu-root>li.static').click(function() {
+    $('#sideNavBox ul.ms-core-listMenu-root li>span.ms-core-listMenu-item').click(function() {
       
       if($(this).hasClass('active-menu')) {
-        $(this).find('ul.static').slideUp();
+        $(this).next().slideUp();
         $(this).removeClass('active-menu');
       } else {
-        $('#sideNavBox .ms-core-listMenu-root>li.static.active-menu').find('ul.static').slideUp();
-        $('#sideNavBox .ms-core-listMenu-root>li.static.active-menu').removeClass('active-menu');
-        $(this).find('ul.static').slideDown();
+        $('#sideNavBox ul.ms-core-listMenu-root li>span.ms-core-listMenu-item').next().slideUp();
+        $('#sideNavBox ul.ms-core-listMenu-root li>span.ms-core-listMenu-item').removeClass('active-menu');
+        $(this).next().slideDown();
         $(this).addClass('active-menu');
       }
 

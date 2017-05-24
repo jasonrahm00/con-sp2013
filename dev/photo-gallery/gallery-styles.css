@@ -21,7 +21,8 @@
 }
 
 .gallery-thumbnails {
-  text-align: center;
+  margin: 0 auto;
+  max-width: 850px;
 }
 
 .gallery-thumbnails img.selected {
@@ -44,12 +45,16 @@
 }
 
 .preview-wrapper figure {
+  display: table-cell;
+  height: 350px;
   margin: 0;
+  width: 350px;
+  vertical-align: middle;
 }
 
 .preview-wrapper figure img {
-  max-height: 350px;
-  width: auto;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .view-full-image {
