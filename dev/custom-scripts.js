@@ -5,9 +5,27 @@ $(document).ready(function() {
   **************************************************************************/
   
   if(window.location.href.indexOf('pulse') > -1) {
-    $('#sideNavBox .ms-core-listMenu-root li.static ul.static').parent().click(function() {
-      $(this).find('ul.static').slideToggle();        
+    
+    if('#sideNavBox .ms-core-listMenu-root li.static ul.static li.selected') {
+      var activeSideNavLink = $('#sideNavBox .ms-core-listMenu-root li.static ul.static li.static.selected');
+      $(activeSideNavLink).parent().css('display', 'block');
+      $(activeSideNavLink).parent().parent().addClass('active-menu');
+    }
+
+    $('#sideNavBox ul.ms-core-listMenu-root>li.static').click(function() {
+      
+      if($(this).hasClass('active-menu')) {
+        $(this).find('ul.static').slideUp();
+        $(this).removeClass('active-menu');
+      } else {
+        $('#sideNavBox .ms-core-listMenu-root>li.static.active-menu').find('ul.static').slideUp();
+        $('#sideNavBox .ms-core-listMenu-root>li.static.active-menu').removeClass('active-menu');
+        $(this).find('ul.static').slideDown();
+        $(this).addClass('active-menu');
+      }
+
     });
+    
   }
   
   
