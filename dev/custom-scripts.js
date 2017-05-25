@@ -28,8 +28,6 @@ $(document).ready(function() {
     
   }
   
-  
-    
   /**************************************************************************
                     Custom Photo Gallery ~jrahm
   **************************************************************************/
@@ -44,18 +42,20 @@ $(document).ready(function() {
         backdrop = '<div class="backdrop"></div>',
         fadeTimerShort = 250,
         fadeTimerMedium = 500,
-        firstImage = $('.gallery-thumbnails img')[0];
+        firstImage = $('.gallery-thumbnails img')[0],
         lightboxClose = '<span class="lightbox-close">X</span>',
         lightboxOpen = false,
         overlay = '<div class="overlay"></div>';
       
+    //captionSetting === 'on' ? $('.gallery-preview').css('margin-bottom', '9rem') : '';
+    
     //Called in the setImage function If image has alt text, use that as a caption, else no caption shows
     function getCaption(y) {
       if(captionSetting !== 'on') {
         return '';
       }
       if($(y).attr('alt') !== '') {
-        return '<figcaption class="image-caption">' + $(y).attr('alt') + '</figcaption>';
+        return '<figcaption>' + $(y).attr('alt') + '</figcaption>';
       } else {
         return '';
       } 
@@ -103,7 +103,7 @@ $(document).ready(function() {
     //Place selected image preview and full versions in their respective containers  
     function placeImage() {
       $('.preview-image').html('<figure><img alt ="Image preview" src="' + selectedPre + '">' + caption + '</figure><span class="view-full-image"><img alt="Magnifying glass icon" src="/SiteCollectionImages/magnify-glass-icon.png"></span>');    
-      $('.lightbox-content').html('<img alt ="" src="' + selectedFull + '">' + lightboxClose);
+      $('.lightbox-content').html('<figure><img alt ="" src="' + selectedFull + '">' + caption + '</figure>' + lightboxClose);
 
       //Add click event to the lightbox-close button whenever the image changes
       $('.lightbox-close').click(function() {
@@ -176,5 +176,5 @@ $(document).ready(function() {
     });
 
   }
-
+  
 });
