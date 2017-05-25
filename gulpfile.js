@@ -27,6 +27,7 @@ gulp.task('minify-css', function() {
 gulp.task('minify-js', function() {
   return gulp.src(['dev/custom-scripts.js'])
     .pipe(uglify())
+    .pipe(rename('custom-scripts.min.js'))
     .pipe(gulp.dest('dist'))
 });
 

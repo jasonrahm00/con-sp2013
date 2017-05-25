@@ -43,13 +43,15 @@ section {
   margin-top: 1rem;
 }
 
+section:first-child {
+  margin-top: 0;
+}
+
 section:last-child {
   margin-bottom: 0;
 }
 
-section:first-child {
-  margin-top: 0;
-}
+
 
 /** Hide only visually, but have it available for screenreaders: h5bp.com/v **/
 .visuallyhidden {

@@ -1,5 +1,10 @@
 $(document).ready(function() {
   
+  //If there are custom content zones with empty containers, the zone is hidden from the page 
+  $.each($('.content-zone .ms-rtestate-field'), function(index, value) {
+    $(value).html() === '' ? $(value).parent().css('display', 'none') : '';
+  });
+  
   /**************************************************************************
                     Custom Side Nav Accordion Functionality
   **************************************************************************/
