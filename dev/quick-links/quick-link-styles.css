@@ -1,229 +1,54 @@
-/**************************************************************************
-                  Custom Photo Gallery Styles ~jrahm
-**************************************************************************/
-
-.gallery-preview {
-  height: 375px;
-  margin-bottom: 6rem;
-  position: relative;
-  text-align: center;
-}
-
-.gallery-thumbnails img {
-  height: 75px;
-  margin-right: 5px;
-  width: auto;
-}
-
-.gallery-thumbnails img:hover {
-  cursor: pointer;
-  opacity: .4;
-}
-
-.gallery-thumbnails {
-  margin: 0 auto;
-  max-width: 850px;
-  text-align: center;
-}
-
-.gallery-thumbnails img.selected {
-  opacity: .4;
-}
-
-.photo-gallery figcaption {
-  display: block;
-  margin-top: 5px;
-  text-align: left;
-}
-
-.photo-gallery figure {
-  margin: 0;
-}
-
-.preview-wrapper {
-  margin: 0 auto;
-  max-height: 435px;
-  width: 375px;
-}
-
-.preview-wrapper:hover {
-  cursor: pointer;
-}
-
-.preview-wrapper figure {
-  display: table-cell;
-  height: 350px;
-  margin: 0;
-  width: 350px;
-  vertical-align: middle;
-}
-
-.preview-wrapper figure img {
-  max-height: 100%;
-  max-width: 100%;
-}
-
-.view-full-image {
-  color: #565A5C;
-  display: block;
-  margin-top: .75rem;
-  text-align: center;
-}
-
-/************* Lightbox ****************/
-
-.lightbox {
-  display: none;
-  height:100%;
-  left:0;
-  position:absolute;
-  text-align: center;
-  top:0;
-  width:100%;
-}
-
-.lightbox>div:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-}
-
-.lightbox>div {
-  align-items: center;
+.quick-links {
   display: flex;
-  height: 800px;
-  justify-content: center;
-  left: 25%;
-  position: fixed;
-  top: 5%;
-  width: 1050px;
-  z-index: 10000;
 }
 
-.lightbox-close {
-  color: #565A5C;
-  font-size: 1.25rem;
-  font-weight: bold;
-  position: absolute;
-  right: -15px;
-  top: -10px;
+.quick-links a,
+.quick-links a:active,
+.quick-links a:focus
+.quick-links a:hover,
+.quick-links a:visited {
+  color: white;
+  text-decoration: none;
 }
 
-.lightbox-close:hover {
-  cursor: pointer;
-}
-
-.lightbox-content {
-  border: 20px solid #fff;
-  display: inline-block;  
-  height: auto;
-  line-height: 0px;
-  opacity: 0;
-  position: relative; 
-}
-
-.lightbox-content img {
-  width: 100%;
-}
-
-.lightbox-content figcaption {
-  bottom: 4px;
-  color: #fff;
-  font-size: .85rem;
-  left: 4px;
-  letter-spacing: 1px;
-  line-height: initial;
-  position: absolute;
-  text-shadow:
-    -1px -1px 0 #000, 
-    1px -1px 0 #000, 
-    -1px 1px 0 #000, 
-    1px 1px 0 #000;
-  width: 100%;
-}
-
-.overlay {
-  background-color: #000;
-  height: 100%;
-  left: 0;
-  opacity: 0;
-  overflow: auto;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 900;
-}
-
-
-
-/************* Gallery Controls ****************/
-/* https://codepen.io/fixcl/pen/Fkcot */
-
-.arrow::before {
-  border-style: solid;
-  border-width: 2px 2px 0 0;
-  content: '';
-  display: inline-block;
-  height: 0.5em;
+.quick-link-container {
+  height: 150px;
+  margin-right: 10px;
+  overflow: hidden;
   position: relative;
-  top: -3px;
-  transform: rotate(-45deg);
-  vertical-align: middle;
-  width: 0.45em;
+  width: 150px;
 }
 
-.arrow.left:before {
-  transform: rotate(-135deg);
+.quick-link-container:last-child {
+  margin-right: 0;
 }
 
-.arrow.right:before {
-  top: 0;
-  transform: rotate(45deg);
+.quick-link-container img {
+  height: auto;
+  width: 150px;
 }
 
-.gallery-scroll {
-  color: #a2a4a3;
-  font-size: 1.5rem;
-  padding: .75rem;
+.quick-link-content {
+  background-color: rgba(0, 0, 0, 0.75);
+  height: 150px;
   position: absolute;
-  top: 50%;
+  top: 100px;
+  width: 150px;
+  z-index: 1000;
 }
 
-.gallery-scroll:hover {
-  cursor: pointer;
+.quick-link-content ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 6px 10px 10px 10px;
 }
 
-.gallery-scroll.inactive {
-  opacity: 0.25;
+.quick-link-content .quick-link-header {
+  display: table-cell;
+  height: 36px;
+  vertical-align: bottom;
 }
 
-.gallery-scroll.inactive:hover {
-  cursor: default;
-}
-
-.gallery-scroll.previous {
-  left: 25%;
-}
-
-.gallery-scroll.next {
-  right: 25%;
-}
-
-.lightbox .gallery-scroll {
-  color: #fff;
-  top: calc(50% - .75rem);
-}
-
-.lightbox .next {
-  order: 3;
-  right: 0;
-}
-
-.lightbox .previous {
-  left: 0;
-  order: 1;
-}
-
-.lightbox-content {
-  order: 2;
+.quick-link-content .quick-link-blurb {
+  padding-top: 15px;
 }

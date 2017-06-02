@@ -37,7 +37,19 @@ $(document).ready(function() {
   }
   
   /**************************************************************************
-                    Custom Photo Gallery ~jrahm
+                      Custom Quick Link Functionality
+  **************************************************************************/
+  //Used on pages where Promoted Links are hard-coded instead of used for app (IT Homepage)
+  $('.quick-link-container').hover(
+    function() {
+      $(this).find('.quick-link-content').animate({top: '0px'},250);
+    }, function() {
+      $(this).find('.quick-link-content').animate({top: '100px'},250);
+    }
+  );
+  
+  /**************************************************************************
+                        Custom Photo Gallery
   **************************************************************************/
   
   var photoGallery = document.getElementsByClassName('photo-gallery');
