@@ -54,14 +54,6 @@ section {
   margin-top: 1rem;
 }
 
-section:first-child {
-  margin-top: 0;
-}
-
-section:last-child {
-  margin-bottom: 0;
-}
-
 .center {
   text-align: center;
 }
@@ -371,7 +363,67 @@ li.ms-navedit-editArea {
   margin-top: 2rem;
 }
 
+.no-margin {
+  margin: 0;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.no-margin-horizontal {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.no-margin-left {
+  margin-left: 0;
+}
+
+.no-margin-right {
+  margin-right: 0;
+}
+
+.no-margin-top {
+  margin-top: 0;
+}
+
+.no-margin-vertical {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /******************** Padding ********************/
+
+.no-padding {
+  padding: 0;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0;
+}
+
+.no-padding-horizontal {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.no-padding-left {
+  padding-left: 0;
+}
+
+.no-padding-right {
+  padding-right: 0;
+}
+
+.no-padding-top {
+  padding-top: 0;
+}
+
+.no-padding-vertical {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
 .padding-bottom-large {
   margin-bottom: 5rem;
