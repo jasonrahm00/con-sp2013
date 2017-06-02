@@ -1,4 +1,3 @@
-/* Utility */
 * {
   font-family: Tahoma, Helvetica, Arial, sans-serif;
 }
@@ -6,6 +5,12 @@
 body, 
 .ms-core-overlay {
   background-color: #fff;
+}
+
+h1,
+.ms-core-pageTitle {
+  color: #000;
+  font-size: 2.77rem;
 }
 
 h1,
@@ -39,6 +44,11 @@ h3 {
   font-weight:bold;
 }
 
+h1 {
+  color: #000;
+  font-size: 2.77rem;
+}
+
 section {
   margin-bottom: 1rem;
   margin-top: 1rem;
@@ -52,28 +62,14 @@ section:last-child {
   margin-bottom: 0;
 }
 
-
-
-/** Hide only visually, but have it available for screenreaders: h5bp.com/v **/
-.visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+.center {
+  text-align: center;
 }
-/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
-.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  width: auto;
+
+.clearfix:after {
+  clear: both;
 }
+
 .clearfix:before, .clearfix:after {
   content: "";
   display: table;
@@ -81,13 +77,6 @@ section:last-child {
 
 .hidden {
   display: none;
-}
-
-.clearfix:after {
-  clear: both;
-}
-.clearfix {
-*zoom: 1;
 }
 
 #contentBox {
@@ -99,6 +88,7 @@ section:last-child {
   content: "";
   display: table;
 }
+
 #contentRow:after {
   clear: both;
 }
@@ -107,125 +97,34 @@ section:last-child {
   padding-top: 0;
 }
 
+/**********************************************************
+    
+                  Flexbox Classes
 
-/* Adjustments to OOB Seattle layout */
+**********************************************************/
 
-/* Hide this menu item in site-actions. Per requirements.*/
-#univ-intranet-seattle #zz10_MenuItem_ChangeTheLook, #univ-intranet-seattle #zz11_MenuItem_ChangeTheLook {
-  display: none;
-}
-
-#univ-intranet-seattle #RibbonContainer .ms-cui-topBar2 .ms-cui-tts {
-  margin-left: 6em;
+.align-self-end {
+  align-self: flex-end;
 }
 
-#univ-intranet-seattle #s4-ribbonrow, body#univ-intranet-seattle #mysite-ribbonrow {
-  display: block;
+.around {
+  justify-content: space-around;
 }
 
-/** MySite Specific **/
-
-/*** Site icon ***/
-body.univ-intranet-mysite #contentRow {
-  padding-top: 0;
+.between {
+  justify-content: space-between;
 }
 
-#univ-intranet-seattle #mysite-titlerow, #univ-intranet-seattle #s4-titlerow.ms-mysite-titlerow {
-  margin-left: 0;
+.flex-column {
+  flex-direction: column;
 }
 
-/*** CTA menu ***/
-
-#univ-intranet-seattle.univ-intranet-mysite .ctaBox {
-  margin-top: 1em;
-}
-#univ-intranet-seattle.univ-intranet-mysite .ctaBox ul {
-  padding-top: 0;
-  margin-top: 0;
-}
-#univ-intranet-seattle.univ-intranet-mysite .ctaBox li {
-  padding-top: .5em;
+.flex-container {
+  display: flex;
 }
 
-/* Custom Design */
-/** Header **/
-
-#univ-intranet-seattle .ms-core-suiteLink-a:hover {
-  background-color: #000;
-}
-/*** Powershell injected SuiteBar root intranet menu ***/
-#univ-intranet-seattle .logo {
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin: .65em .9em;
-  z-index: 9999;
-}
-#univ-intranet-seattle .WrapHomeRootMenu {
-  float: right;
-}
-#univ-intranet-seattle #DeltaSuiteLinks {
-  width: 15%;
-}
-/*** Search ***/
-
-#univ-intranet-seattle #ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sbox, .ms-srch-sb > input {
-  margin-top: 2px;
-  text-transform: lowercase;
-}
-#univ-intranet-seattle #searchInputBox #SearchBox a.ms-srch-sb-navLink {
-  display: none;
-}
-/**** Search Center ****/
-#univ-intranet-seattle .ms-srchnav-list li.ms-srchnav-item {
-  border-bottom: 5px solid #4c4c4c;
-}
-#univ-intranet-seattle .ms-srchnav-list .ms-srchnav-item h2 a {
-  display: inline-block;
-  margin-top: 2em;
-  padding: .5em;
-}
-#univ-intranet-seattle .ms-srchnav-link-selected:link {
-  background-color: #4c4c4c;
-  color: #fff;
-}
-
-/*** Drop-down select menu ***/
-
-.WrapHomeRootMenu {
-  width: 221px;
-  height: 21px;
-  overflow: hidden;
-  border: 1px solid #222;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  font-weight: bold;
-}
-select#homeRootMenu {
-  background: #424242 url(/_layouts/15/images/univ-intranet/dropArrow.png) no-repeat 195px -2px;
-  border: 0 solid #000000;
-  color: #F0F0F0;
-  font-size: 13px;
-  margin: 8px 0 0 0;
-  padding: 2px 0 0 9px;
-  width: 250px;
-  margin-top: 1px;
-  /*font-family:"MuliRegular";*/
-  font-weight: 100;
-}
-
-
-/** suite bar color override -- a special filter is applied by SP for ie8, turning the suite bar transparent. This is a bug **/
-#univ-intranet-seattle .ms-core-needIEFilter #suiteBarLeft {
-  background-color: #464646;
-}
-
-#univ-intranet-seattle #suiteBarLeft {
-  background-color: #464646;
-}
-
-#univ-intranet-seattle #suiteBarRight {
-  background-color: #000;
+.flex-wrap-wrap {
+  flex-wrap: wrap;
 }
 
 
@@ -271,9 +170,21 @@ nav .ms-core-listMenu-root>li.static>ul>li {
   background: #cfb87c;
 }
 
+#DeltaTopNavigation ul.root>li.static>a {
+  display: none;
+}
+
+#DeltaTopNavigation ul.root>li.static>ul.static {
+  margin-left: 6rem;
+}
+
 
 
 /******************** Side Nav ********************/
+
+#DeltaPlaceHolderLeftNavBar>div>.ms-core-listMenu-verticalBox {
+  display: none;
+}
 
 #sideNavBox {
   margin-top: .85rem;
@@ -294,6 +205,7 @@ nav .ms-core-listMenu-root>li.static>ul>li {
 
 
 
+
 /**********************************************************
     
                Custom SharePoint Overrides
@@ -307,13 +219,10 @@ li.static span:focus,
   outline: none;
 }
 
-.ms-core-listMenu-horizontalBox li.static>a {
-  display: none !important;
-}
-
 .ms-WPBorderBorderOnly {
   border: 0;
 }
+
 
 li.ms-navedit-editArea {
   display: none !important;
@@ -328,6 +237,68 @@ li.ms-navedit-editArea {
 }
 
 
+
+/**********************************************************
+    
+                  Custom Widths
+
+**********************************************************/
+
+.full-width {
+  width: 100%;
+}
+
+.width-75 {
+  width: 75%;
+}
+
+.width-70 {
+  width: 70%;
+}
+
+.width-65 {
+  width: 65%;
+}
+
+.width-60 {
+  width: 60%;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.width-45 {
+  width: 45%;
+}
+
+.width-40 {
+  width: 40%;
+}
+
+.width-35 {
+  width: 35%;
+}
+
+.width-30 {
+  width: 30%;
+}
+
+.width-25 {
+  width: 25%;
+}
+
+.width-20 {
+  width: 20%;
+}
+
+.width-15 {
+  width: 15%;
+}
+
+.width-10 {
+  width: 10%;
+}
 
 /**********************************************************
     

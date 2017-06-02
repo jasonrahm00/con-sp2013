@@ -5,6 +5,9 @@ $(document).ready(function() {
     $(value).html() === '' ? $(value).parent().css('display', 'none') : '';
   });
   
+  //Remove Recent from Left Nav
+  $(".ms-core-listMenu-item:contains('Recent')").parent().remove();
+  
   /**************************************************************************
                     Custom Side Nav Accordion Functionality
   **************************************************************************/

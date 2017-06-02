@@ -19,7 +19,7 @@ gulp.task('clean:dist', function() {
 
 gulp.task('minify-css', function() {
   return gulp.src(['dev/styles.css', 'dev/photo-gallery/*.css'])
-    .pipe(concatCss('univ-intranet-seattle.css'))
+    .pipe(concatCss('custom-master-styles.css'))
     .pipe(cssnano())
     .pipe(gulp.dest('dist'));
 });
