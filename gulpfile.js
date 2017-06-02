@@ -18,7 +18,7 @@ gulp.task('clean:dist', function() {
 });
 
 gulp.task('minify-css', function() {
-  return gulp.src(['dev/styles.css', 'dev/photo-gallery/*.css', 'dev/quick-links/*.css'])
+  return gulp.src(['dev/styles.css', 'dev/photo-gallery/*.css', 'dev/quick-links/*.css', 'dev/accordion-widget/*.css'])
     .pipe(concatCss('custom-master-styles.css'))
     .pipe(cssnano())
     .pipe(gulp.dest('dist'));
