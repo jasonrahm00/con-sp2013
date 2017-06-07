@@ -46,7 +46,7 @@ $(document).ready(function() {
                       Custom List Filter Functionality
   **************************************************************************/
   
-  (function(){
+  (function() {
     if($('.list-filter').length > 0){
     
       var currentUrl = window.location.href,
@@ -90,17 +90,30 @@ $(document).ready(function() {
                       Custom Accordion Functionality
   **************************************************************************/
 
-  $('.accordion-header').click(function() {
-    if($(this).hasClass('active')) {
-      $(this).next().slideUp();
-      $(this).removeClass('active');
-    } else {
-      $('.accordion-header').next().slideUp();
-      $('.accordion-header').removeClass('active');
-      $(this).next().slideDown();
-      $(this).addClass('active');
-    }
-  });
+  (function() {
+    if($('.accordion-header').length > 0) {
+      
+      $('.accordion-header').click(function() {
+        if($(this).hasClass('active')) {
+          $(this).next().slideUp();
+          $(this).removeClass('active');
+        } else {
+          $('.accordion-header').next().slideUp();
+          $('.accordion-header').removeClass('active');
+          $(this).next().slideDown();
+          $(this).addClass('active');
+        }
+      });
+      
+      //Print button can be added to the page if users want to open all accordions then print the page
+        //@print media query won't open all accordions, for some reason
+      $('.print-accordion').click(function() {
+        $('.accordion-content').css('display', 'block');
+        window.print();
+      })
+    }    
+  })();
+  
    
   
   
@@ -123,7 +136,7 @@ $(document).ready(function() {
                         Custom Photo Gallery
   **************************************************************************/
   
-  (function(){
+  (function() {
     if($('.photo-gallery').length > 0) {
       var caption, currentThumb, selectedIndex, selectedThumb,
         captionSetting = $('.photo-gallery').attr('data-caption'),

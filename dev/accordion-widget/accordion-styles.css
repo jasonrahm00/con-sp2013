@@ -32,16 +32,3 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-
-/******************** Print Media Query ********************/
-@media print {
-  
-  .accordion-content {
-    display: block;
-  }
-  
-  .accordion-header {
-    background: whitesmoke;
-  }
-  
-}
