@@ -50,10 +50,10 @@ $(document).ready(function() {
     if($('.list-filter').length > 0){
     
       var currentUrl = window.location.href,
-          cleanUrl = currentUrl.split('?View=')[0] ? currentUrl.split('?View=')[0] : currentUrl,
+          cleanUrl = currentUrl.split('?')[0] ? currentUrl.split('?')[0] : currentUrl,
           filterValue;
 
-      if(currentUrl.indexOf('?View=') > -1) {
+      if(currentUrl.indexOf('?') > -1) {
         $('.list-filter input').each(function(index, value) {
           if(currentUrl.indexOf($(value).val()) > -1) {
             $(value).parent().addClass('active');
@@ -76,7 +76,7 @@ $(document).ready(function() {
             window.location.replace(cleanUrl);
 
           } else {
-            window.location.replace(cleanUrl + filterValue);
+            window.location.replace(cleanUrl + '?' + filterValue);
           }
         }
       });   
