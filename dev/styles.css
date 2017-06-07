@@ -14,7 +14,7 @@ h1,
 }
 
 h1,
-header h1>div,
+h1>div,
 .ms-core-pageTitle, 
 #DeltaPlaceHolderPageTitleInTitleArea {
   font-family: "Segoe UI Light","Segoe UI Light","Segoe UI","Segoe",Tahoma,Helvetica,Arial,sans-serif;
@@ -89,6 +89,8 @@ section {
   padding-top: 0;
 }
 
+
+
 /**********************************************************
     
                   Flexbox Classes
@@ -118,6 +120,7 @@ section {
 .flex-wrap-wrap {
   flex-wrap: wrap;
 }
+
 
 
 /**********************************************************
@@ -162,6 +165,13 @@ nav .ms-core-listMenu-root>li.static>ul>li {
   background: #cfb87c;
 }
 
+/******************** Term Store Nav Rules ********************/
+
+#DeltaTopNavigation ul.root {
+  margin-left: 6rem;
+}
+
+/* Style rules if using structured navigation
 #DeltaTopNavigation ul.root>li.static>a {
   display: none;
 }
@@ -169,10 +179,15 @@ nav .ms-core-listMenu-root>li.static>ul>li {
 #DeltaTopNavigation ul.root>li.static>ul.static {
   margin-left: 6rem;
 }
+*/
 
 
 
 /******************** Side Nav ********************/
+
+#sideNavBox .active-menu {
+  border-bottom: 2px solid rgba(210, 210, 210, 0.4);
+}
 
 #DeltaPlaceHolderLeftNavBar>div>.ms-core-listMenu-verticalBox {
   display: none;
@@ -197,12 +212,15 @@ nav .ms-core-listMenu-root>li.static>ul>li {
 
 
 
-
 /**********************************************************
     
                Custom SharePoint Overrides
 
 **********************************************************/
+
+input.ms-long {
+  width: 100% !important;
+}
 
 li.static:focus,
 li.static span:focus,
@@ -211,21 +229,42 @@ li.static span:focus,
   outline: none;
 }
 
-.ms-WPBorderBorderOnly {
-  border: 0;
-}
-
-
 li.ms-navedit-editArea {
   display: none !important;
 }
 
-.tableCol-50 {
-  vertical-align: top;
+.ms-basictable .ms-alternating{
+  background-color: rgba(210, 210, 210, 0.4);
 }
 
 .ms-core-pageTitle {
   margin-bottom: 2rem;
+}
+
+.ms-formfieldlabel {
+  font-size: 13px !important;
+}
+
+.ms-webpart-titleText.ms-webpart-titleText, 
+.ms-webpart-titleText>a,
+.ms-webpart-titleText>a span,
+.ms-webpart-titleText>a:active,
+.ms-webpart-titleText>a:hover {
+  color: #565A5C;
+  font-family: MuliRegular, Helvetica, Arial, sans-serif !important;
+  text-decoration: none;
+}
+
+.no-table-head thead {
+  display: none;
+}
+
+.ms-WPBorderBorderOnly {
+  border: 0;
+}
+
+.tableCol-50 {
+  vertical-align: top;
 }
 
 
@@ -291,6 +330,47 @@ li.ms-navedit-editArea {
 .width-10 {
   width: 10%;
 }
+
+
+/**********************************************************
+    
+                  List Filter Styles
+
+**********************************************************/
+
+.list-filter {
+  margin: 2rem 0;
+}
+
+.list-filter input[type="radio"] {
+  display: none;
+  margin: 0;
+}
+
+.list-filter label {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 15px;
+  margin-bottom: 3px;
+  min-width: 5%;
+  padding: 10px;
+  text-align: center;
+}
+
+.list-filter label:hover {
+  cursor: pointer;
+  background: #cfb87c;
+}
+
+.list-filter label.active {
+  background: #cfb87c
+}
+
+
+
+
 
 /**********************************************************
     
