@@ -67,6 +67,10 @@ section {
   display: table;
 }
 
+.gray-background {
+  background: rgba(210, 210, 210, 0.4);
+}
+
 .hidden {
   display: none;
 }
@@ -287,6 +291,21 @@ li.ms-navedit-editArea {
   vertical-align: top;
 }
 
+/******************** Format Text Ribbon Overrides ********************/
+/* http://blog.sharepointexperience.com/2014/06/hide-from-sharepoint-ribbon/ */
+
+#Ribbon\.EditingTools\.CPEditTab\.Font-Large-0-0,
+#Ribbon\.EditingTools\.CPEditTab\.Font\.Underline-Small,
+#Ribbon\.EditingTools\.CPEditTab\.Font\.Strikethrough-Small,
+#Ribbon\.EditingTools\.CPEditTab\.Font\.FontBackgroundColor-Small,
+#Ribbon\.EditingTools\.CPEditTab\.Font\.FontColor-Small,
+#Ribbon\.EditingTools\.CPEditTab\.Styles {
+  display: none !important;
+}
+
+#Ribbon\.EditingTools\.CPEditTab\.Font-Large-0-1 {
+  margin-top: 38px !important; 
+}
 
 
 /**********************************************************

@@ -16,8 +16,9 @@
 .accordion-header {
   border: 1px solid #ddd;
   border-radius: 4px;
+  color: #531111 !important;
   font-size: 1rem;
-  font-weight: normal;
+  font-weight: normal !important;
   margin: 0;
   padding: 1rem;
 }

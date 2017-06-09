@@ -12,11 +12,16 @@
 }
 
 .quick-link-container {
+  background-color: #000;
   height: 150px;
   margin-right: 10px;
   overflow: hidden;
   position: relative;
   width: 150px;
+}
+
+.quick-link-container:hover {
+  cursor: pointer;
 }
 
 .quick-link-container:last-child {
