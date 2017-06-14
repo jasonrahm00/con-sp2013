@@ -41,8 +41,8 @@
 	<SharePoint:CssRegistration Name="Themable/corev15.css" runat="server" />
   <SharePoint:CssRegistration Name="<%$SPUrl:~SiteCollection/Style Library/custom-styles/custom-master-styles.css%>" runat="server" />
         
-</head>
-<body id="testMaster">
+</head>f
+<body id="testSubsite">
   <SharePoint:ImageLink runat="server"/>
   <SharePoint:SPNoScript runat="server"/>
   <SharePoint:SPClientIDGenerator runat="server" ServerControlID="DeltaPlaceHolderMain;DeltaPlaceHolderPageTitleInTitleArea;DeltaPlaceHolderUtilityContent" />
