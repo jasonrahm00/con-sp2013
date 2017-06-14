@@ -1,5 +1,22 @@
-* {
-  font-family: Tahoma, Helvetica, Arial, sans-serif;
+a.button,
+.print-accordion {
+  background: #000;
+  border: 0;
+  border-radius: 4px; 
+  color: #fff;
+  display: inline-block;
+  font-size: 1rem;
+  padding: .5rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+a.button:hover,
+.print-accordion:hover{
+  background: #000;
+  color: #cfb87c;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 body, 
@@ -54,6 +71,10 @@ section {
   margin-top: 1rem;
 }
 
+ul.no-bullets {
+  list-style-type: none;
+}
+
 .center {
   text-align: center;
 }
@@ -75,42 +96,8 @@ section {
   display: none;
 }
 
-.print-accordion {
-  background: #000;
-  border: 0;
-  border-radius: 4px; 
-  color: #fff;
-  display: inline-block;
-  font-size: 1rem;
-  text-align: center;
-}
-
 .print-accordion:focus {
   outline: none;
-}
-
-.print-accordion:hover{
-  cursor: pointer;
-  background: #000;
-  color: #cfb87c;
-}
-
-#contentBox {
-  margin-left: 280px;
-  max-width: 1280px;
-}
-
-#contentRow:before, #contentRow:after {
-  content: "";
-  display: table;
-}
-
-#contentRow:after {
-  clear: both;
-}
-#contentRow {
-  margin: 0 2rem;
-  padding-top: 0;
 }
 
 
@@ -289,6 +276,45 @@ li.ms-navedit-editArea {
 
 .tableCol-50 {
   vertical-align: top;
+}
+
+#contentBox {
+  margin-left: 280px;
+  max-width: 1280px;
+}
+
+#contentRow:before, #contentRow:after {
+  content: "";
+  display: table;
+}
+
+#contentBox li {
+  line-height: 1.5rem;
+}
+
+#contentBox p,
+#contentBox li {
+  font-size: .85rem;
+}
+
+#contentRow:after {
+  clear: both;
+}
+
+#contentRow {
+  margin: 0 2rem;
+  padding-top: 0;
+}
+
+
+.ms-promlink-body,
+.ms-tileview-tile-titleTextMediumCollapsed {
+  font-size: 1em;
+}
+
+.ms-promlink-body li,
+.ms-tileview-tile-titleTextMediumCollapsed {
+  line-height: initial;
 }
 
 /******************** Format Text Ribbon Overrides ********************/
