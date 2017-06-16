@@ -133,10 +133,20 @@ nav .ms-core-listMenu-root>li.static>ul>li {
   font-size: .9rem;
 } 
 
+#DeltaTopNavigation li.dynamic-children span.dynamic-children:hover {
+  cursor: default;
+}
+
 #DeltaTopNavigation .dynamic-children ul.dynamic {
   border: 1px solid #ddd;
   box-shadow: none;
   width: 225px !important;
+}
+
+.ms-core-listMenu-horizontalBox .ms-core-listMenu-selected:link,
+.ms-core-listMenu-horizontalBox .ms-core-listMenu-selected,
+#DeltaTopNavigation a:visited {
+  color: #000;
 }
 
 .ms-core-listMenu-item:hover,
@@ -157,6 +167,14 @@ nav .ms-core-listMenu-root>li.static>ul>li {
 #DeltaTopNavigation .dynamic-children .dynamic a:hover {
   background: #cfb87c;
 }
+
+/*
+#DeltaTopNavigation ul.ms-core-listMenu-root li.selected>a,
+#DeltaTopNavigation ul.ms-core-listMenu-root li.dynamic-children.selected>span,
+#DeltaTopNavigation ul.ms-core-listMenu-root li.dynamic-children.selected a.selected>span {
+  border-bottom: 2px solid #cfb87c;
+}
+*/
 
 /******************** Term Store Nav Rules ********************/
 
