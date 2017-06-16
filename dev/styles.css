@@ -104,32 +104,14 @@ ul.no-bullets {
 
 /**********************************************************
     
-                  Flexbox Classes
+               Breadcrumb Styles
 
 **********************************************************/
 
-.align-self-end {
-  align-self: flex-end;
-}
-
-.around {
-  justify-content: space-around;
-}
-
-.between {
-  justify-content: space-between;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
-.flex-container {
-  display: flex;
-}
-
-.flex-wrap-wrap {
-  flex-wrap: wrap;
+#breadcrumbContainer {
+  display: none;
+  margin-left: 6rem; 
+  margin-top: 3rem;
 }
 
 
@@ -283,11 +265,6 @@ li.ms-navedit-editArea {
   max-width: 1280px;
 }
 
-#contentRow:before, #contentRow:after {
-  content: "";
-  display: table;
-}
-
 #contentBox li {
   line-height: 1.5rem;
 }
@@ -297,12 +274,17 @@ li.ms-navedit-editArea {
   font-size: .85rem;
 }
 
+#contentRow:before, #contentRow:after {
+  content: "";
+  display: table;
+}
+
 #contentRow:after {
   clear: both;
 }
 
 #contentRow {
-  margin: 0 2rem;
+  margin: 2rem;
   padding-top: 0;
 }
 
@@ -332,6 +314,39 @@ li.ms-navedit-editArea {
 #Ribbon\.EditingTools\.CPEditTab\.Font-Large-0-1 {
   margin-top: 38px !important; 
 }
+
+
+
+/**********************************************************
+    
+                  Flexbox Classes
+
+**********************************************************/
+
+.align-self-end {
+  align-self: flex-end;
+}
+
+.around {
+  justify-content: space-around;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-wrap-wrap {
+  flex-wrap: wrap;
+}
+
 
 
 /**********************************************************
@@ -397,6 +412,7 @@ li.ms-navedit-editArea {
 }
 
 
+
 /**********************************************************
     
                   List Filter Styles
@@ -432,8 +448,6 @@ li.ms-navedit-editArea {
 .list-filter label.active {
   background: #cfb87c
 }
-
-
 
 
 

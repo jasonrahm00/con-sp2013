@@ -5,8 +5,7 @@ $(document).ready(function() {
     $(value).html() === '' ? $(value).parent().css('display', 'none') : '';
   });
   
-  //Remove Recent from Left Nav
-  $(".ms-core-listMenu-item:contains('Recent')").parent().remove();
+  
   
   //Disable table sorting in table header row
   $('.disable-table-sort th').css('pointer-events', 'none')
@@ -17,30 +16,67 @@ $(document).ready(function() {
   
   
   /**************************************************************************
-                    Custom Side Nav Accordion Functionality
+                        Breadcrumb Overrides
+  **************************************************************************/
+  
+  (function() {
+    
+    if($('#breadcrumbContainer a:not(:link)')) {
+      $('#breadcrumbContainer a:not(:link)').hide().parent().next().hide();
+      //$('#breadcrumbContainer>span span').last().prev().hide();
+    }
+    
+    
+    if(_spPageContextInfo.siteServerRelativeUrl == _spPageContextInfo.webServerRelativeUrl) {
+      if(!(window.location.href.indexOf('Pages') > -1) || window.location.href.indexOf('Pages/home') > -1) {
+        return;
+      } else {
+        $('#breadcrumbContainer').show();
+      }
+    } else {
+      $('#breadcrumbContainer').show();
+    }
+  })();
+  
+  
+  
+  /**************************************************************************
+                      Custom Side Nav Functionality
   **************************************************************************/
     
-  if('#sideNavBox .ms-core-listMenu-root li.static ul.static li.selected') {
-    var activeSideNavLink = $('#sideNavBox .ms-core-listMenu-root li.static ul.static li.static.selected');
-    $(activeSideNavLink).parent().css('display', 'block');
-    $(activeSideNavLink).parent().prev().addClass('active-menu');
-  }
-
-  $('#sideNavBox ul.ms-core-listMenu-root li>span.ms-core-listMenu-item').click(function() {
-
-    if($(this).hasClass('active-menu')) {
-      $(this).next().slideUp();
-      $(this).removeClass('active-menu');
-    } else {
-      $('#sideNavBox ul.ms-core-listMenu-root li>span.ms-core-listMenu-item').next().slideUp();
-      $('#sideNavBox ul.ms-core-listMenu-root li>span.ms-core-listMenu-item').removeClass('active-menu');
-      $(this).next().slideDown();
-      $(this).addClass('active-menu');
+  (function() {
+    
+    //Remove Recent from Side Nav
+    $(".ms-core-listMenu-item:contains('Recent')").parent().remove();
+    
+    //Determine if submenus are present and open them if the containing link is selected
+    if('#sideNavBox .ms-core-listMenu-root li.static ul.static li.selected') {
+      var activeSideNavLink = $('#sideNavBox .ms-core-listMenu-root li.static ul.static li.static.selected');
+      $(activeSideNavLink).parent().css('display', 'block');
+      $(activeSideNavLink).parent().prev().addClass('active-menu');
     }
 
-  });
-  
-  
+    //Add click event to side nav items to trigger accordion where sub-menus are available
+    $('#sideNavBox ul.ms-core-listMenu-root li>span.ms-core-listMenu-item').click(function() {
+
+      if($(this).hasClass('active-menu')) {
+        $(this).next().slideUp();
+        $(this).removeClass('active-menu');
+      } else {
+        $('#sideNavBox ul.ms-core-listMenu-root li>span.ms-core-listMenu-item').next().slideUp();
+        $('#sideNavBox ul.ms-core-listMenu-root li>span.ms-core-listMenu-item').removeClass('active-menu');
+        $(this).next().slideDown();
+        $(this).addClass('active-menu');
+      }
+
+    });
+    
+    //Side Nav revealed only after manipulates are completed
+    $('#sideNavBox').removeClass('hidden');
+    
+  })();
+
+
   
   /**************************************************************************
                       Custom List Filter Functionality
