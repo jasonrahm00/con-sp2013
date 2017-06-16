@@ -196,10 +196,6 @@ nav .ms-core-listMenu-root>li.static>ul>li {
 
 /******************** Side Nav ********************/
 
-#sideNavBox .active-menu {
-  border-bottom: 2px solid rgba(210, 210, 210, 0.4);
-}
-
 #DeltaPlaceHolderLeftNavBar>div>.ms-core-listMenu-verticalBox {
   display: none;
 }
@@ -208,17 +204,12 @@ nav .ms-core-listMenu-root>li.static>ul>li {
   margin-top: .85rem;
 }
 
-#sideNavBox li>a.ms-core-listMenu-item:hover,
-#sideNavBox li span.ms-core-listMenu-item:hover {
+#sideNavBox li>a.ms-core-listMenu-item:hover {
   background-color: #cfb87c;
 }
 
-#sideNavBox .ms-core-listMenu-root li.static ul.static {
-  display: none;
-}
-
-#sideNavBox .ms-core-listMenu-root li.static:hover {
-  cursor: pointer;
+#sideNavBox .ms-core-listMenu-root ul.static {
+  border-top: 2px solid rgba(210, 210, 210, 0.4);
 }
 
 
