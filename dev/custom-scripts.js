@@ -2,11 +2,9 @@ $(document).ready(function() {
   
   //If there are custom content zones with empty containers, the zone is hidden from the page 
   $.each($('.content-zone .ms-rtestate-field'), function(index, value) {
-    $(value).html() === '' ? $(value).parent().css('display', 'none') : '';
+    $(value).html() === ''  ? $(value).parent().css('display', 'none') : '';
   });
-  
-  
-  
+    
   //Disable table sorting in table header row
   $('.disable-table-sort th').css('pointer-events', 'none')
   $('.disable-table-sort th').each(function(index, value) {
@@ -36,6 +34,7 @@ $(document).ready(function() {
     } else {
       $('#breadcrumbContainer').show();
     }
+    
   })();
   
   
@@ -48,6 +47,12 @@ $(document).ready(function() {
     
     //Remove Recent from Side Nav
     $(".ms-core-listMenu-item:contains('Recent')").parent().remove();
+    
+    //Place 'selected' class on sub-site home link when on the subsite home page
+      //SharePoint should do this automatically, but it is inconsistent, for some reason
+    if(window.location.href.indexOf('/Pages/default.aspx') > -1) {
+      $('#sideNavBox ul.ms-core-listMenu-root>li:first-child>a').addClass('ms-core-listMenu-selected');
+    }    
     
     //Determine if submenus are present and open them if the containing link is selected
     if('#sideNavBox .ms-core-listMenu-root li.static ul.static li.selected') {
@@ -151,9 +156,7 @@ $(document).ready(function() {
   })();
   
    
-  
-  
-  
+      
   /**************************************************************************
                       Custom Quick Link Functionality
   **************************************************************************/
