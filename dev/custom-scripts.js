@@ -23,18 +23,14 @@ $(document).ready(function() {
     $('#breadcrumbContainer a:not(:link)').hide().parent().next().hide();
   }
 
-  //Breadcrumb is only shown if it isn't the site root page
-  if(_spPageContextInfo.siteServerRelativeUrl == _spPageContextInfo.webServerRelativeUrl) {
-    if(!(window.location.href.indexOf('Pages') > -1) || window.location.href.indexOf('Pages/home') > -1) {
-      return;
-    } else {
-      $('#breadcrumbContainer').show();
-    }
+  //Breadcrumb is only shown if it isn't the site root page  
+  if(window.location.href.indexOf('intranet-home') > -1) {
+    return;
   } else {
     $('#breadcrumbContainer').show();
   }
 
-  
+
   
   /**************************************************************************
                       Custom Main Nav Functionality
@@ -88,6 +84,8 @@ $(document).ready(function() {
 
   //Side Nav revealed only after manipulates are completed
   $('#sideNavBox').removeClass('hidden');
+  
+  console.log('jquery firing');
     
 
   
