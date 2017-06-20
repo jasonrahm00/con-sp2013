@@ -24,7 +24,7 @@ $(document).ready(function() {
   }
 
   //Breadcrumb is only shown if it isn't the site root page  
-  if(window.location.href.indexOf('intranet-home') > -1) {
+  if(window.location.href.indexOf('home') > -1) {
     return;
   } else {
     $('#breadcrumbContainer').show();
@@ -84,8 +84,6 @@ $(document).ready(function() {
 
   //Side Nav revealed only after manipulates are completed
   $('#sideNavBox').removeClass('hidden');
-  
-  console.log('jquery firing');
     
 
   
@@ -241,7 +239,7 @@ $(document).ready(function() {
 
     //Place selected image preview and full versions in their respective containers  
     function placeImage() {
-      $('.preview-image').html('<figure><img alt ="Image preview" src="' + selectedThumb + '">' + caption + '</figure><span class="view-full-image"><img alt="Magnifying glass icon" src="/SiteCollectionImages/magnify-glass-icon.png"></span>');    
+      $('.preview-image').html('<figure><img alt ="Image preview" src="' + selectedThumb + '">' + caption + '</figure><span class="view-full-image"><img alt="Magnifying glass icon" src="/PublishingImages/magnify-glass-icon.png"></span>');    
       $('.lightbox-content').html('<figure><img alt ="" src="' + selectedThumb + '">' + caption + '</figure>' + lightboxClose);
 
       //Add click event to the lightbox-close button whenever the image changes
