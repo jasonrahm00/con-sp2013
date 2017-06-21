@@ -11,25 +11,6 @@ $(document).ready(function() {
     $(value).html($(value)[0].textContent);
   });
   
-  
-  
-  /**************************************************************************
-                        Breadcrumb Overrides
-  **************************************************************************/
-    
-  //Hide breadcrumb entry and carrot if it isn't a link
-    //Custom side-nav headings that aren't linked are being added to breadcrumbs
-  if($('#breadcrumbContainer a:not(:link)')) {
-    $('#breadcrumbContainer a:not(:link)').hide().parent().next().hide();
-  }
-
-  //Breadcrumb is only shown if it isn't the site root page  
-  if(window.location.href.indexOf('home') > -1) {
-    return;
-  } else {
-    $('#breadcrumbContainer').show();
-  }
-
 
   
   /**************************************************************************
@@ -85,7 +66,26 @@ $(document).ready(function() {
   //Side Nav revealed only after manipulates are completed
   $('#sideNavBox').removeClass('hidden');
     
+  
 
+  /**************************************************************************
+                        Breadcrumb Overrides
+  **************************************************************************/
+    
+  //Hide breadcrumb entry and carrot if it isn't a link
+    //Custom side-nav headings that aren't linked are being added to breadcrumbs
+  if($('#breadcrumbContainer a:not(:link)')) {
+    $('#breadcrumbContainer a:not(:link)').hide().parent().next().hide();
+  }
+
+  //Breadcrumb is only shown if it isn't the site root page  
+  if(window.location.href.indexOf('home') > -1 || window.location.href.indexOf('.edu/Lists') > -1) {
+    return;
+  } else {
+    $('#breadcrumbContainer').show();
+  }
+  
+  
   
   /**************************************************************************
                       Custom List Filter Functionality
