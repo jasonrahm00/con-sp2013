@@ -95,7 +95,12 @@ $(document).ready(function() {
 
     var currentUrl = window.location.href,
         cleanUrl = currentUrl.split('?')[0] ? currentUrl.split('?')[0] : currentUrl,
-        filterValue;
+        filterValue,
+        contactEmails = [
+          {"filter": "Academic%20Programs", "email": "nursing.academics@ucdenver.edu"},
+          {"filter": "Faculty%20Affairs", "email": "con.facultyaffairs@ucdenver.edu"},
+          {"filter": "Human%20Resources", "email": "con.hr@ucdenver.edu"}
+        ];
 
     if(currentUrl.indexOf('?') > -1) {
       $('.list-filter input').each(function(index, value) {
@@ -103,6 +108,14 @@ $(document).ready(function() {
           $(value).parent().addClass('active');
         }
       });
+      
+      for(var i = 0; i < contactEmails.length; i++) {
+        if(currentUrl.indexOf(contactEmails[i].filter) > -1) {          
+          $('#contactEmail span').append('<a href="mailto:' + contactEmails[i].email + '">' + contactEmails[i].email + '</a>');
+          $('#contactEmail').removeClass('hidden');
+        }
+      }
+
     } else {
       $('.list-filter label').first().addClass('active');
     }
@@ -118,7 +131,6 @@ $(document).ready(function() {
 
         if(filterValue === 'all') {
           window.location.replace(cleanUrl);
-
         } else {
           window.location.replace(cleanUrl + '?' + filterValue);
         }
