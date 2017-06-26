@@ -337,7 +337,8 @@ li.ms-navedit-editArea {
 #Ribbon\.EditingTools\.CPEditTab\.Font\.Strikethrough-Small,
 #Ribbon\.EditingTools\.CPEditTab\.Font\.FontBackgroundColor-Small,
 #Ribbon\.EditingTools\.CPEditTab\.Font\.FontColor-Small,
-#Ribbon\.EditingTools\.CPEditTab\.Styles {
+#Ribbon\.EditingTools\.CPEditTab\.Styles\.RibbonStyle1-Large,
+#Ribbon\.EditingTools\.CPEditTab\.Styles\.Styles-Thin {
   display: none !important;
 }
 
