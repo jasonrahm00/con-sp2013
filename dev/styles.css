@@ -356,6 +356,10 @@ li.ms-navedit-editArea {
 
 /**** Default Panel ****/
 
+.ms-acal-apanel>ul>li>ul>li:first-child {
+  display: none;
+}
+
 .ms-acal-apanel-item,
 .ms-acal-item {
   background-color: #cfb87c;
@@ -372,13 +376,13 @@ li.ms-navedit-editArea {
 /**** Panel 1 ****/
 .ms-acal-color1,
 .ms-acal-apanel-item.ms-acal-apanel-color1 {
-  background-color: #b288b9;
+  background-color: #cfb87c;
 }
 
 /**** Panel 2 ****/
 .ms-acal-color2,
 .ms-acal-apanel-item.ms-acal-apanel-color2 {
-  background-color: #89abe3;
+  background-color: #b288b9;
 }
 
 /**** Panel 3 ****/
@@ -396,13 +400,19 @@ li.ms-navedit-editArea {
 /**** Panel 5 ****/
 .ms-acal-color5,
 .ms-acal-apanel-item.ms-acal-apanel-color5 {
-  background-color: #9ea700;
+  background-color: #89abe3;
 }
 
 /**** Panel 6 ****/
 .ms-acal-color6,
 .ms-acal-apanel-item.ms-acal-apanel-color6 {
   background-color: #6bbbae;
+}
+
+/**** Panel 7 ****/
+.ms-acal-color6,
+.ms-acal-apanel-item.ms-acal-apanel-color6 {
+  background-color: #9ea700;
 }
 
 
