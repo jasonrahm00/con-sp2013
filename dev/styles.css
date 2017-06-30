@@ -94,7 +94,7 @@ ul.no-bullets {
 }
 
 .gray-background {
-  background: rgba(210, 210, 210, 0.4);
+  background: #ededed;
 }
 
 .hidden {
@@ -119,7 +119,6 @@ ul.no-bullets {
 .home-page-image strong {
   color: #cfb87c;
 }
-
 
 
 
@@ -159,6 +158,7 @@ nav .ms-core-listMenu-root>li.static>ul>li {
 }
 
 #DeltaTopNavigation .dynamic-children ul.dynamic {
+  background-color: #ededed;
   border: 1px solid #ddd;
   box-shadow: none;
   width: 225px !important;
@@ -189,13 +189,11 @@ nav .ms-core-listMenu-root>li.static>ul>li {
   background: #cfb87c;
 }
 
-/*
-#DeltaTopNavigation ul.ms-core-listMenu-root li.selected>a,
-#DeltaTopNavigation ul.ms-core-listMenu-root li.dynamic-children.selected>span,
-#DeltaTopNavigation ul.ms-core-listMenu-root li.dynamic-children.selected a.selected>span {
+#DeltaTopNavigation .active-nav-item>.ms-core-listMenu-item {
   border-bottom: 2px solid #cfb87c;
 }
-*/
+
+
 
 /******************** Term Store Nav Rules ********************/
 

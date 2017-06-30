@@ -17,17 +17,20 @@ $(document).ready(function() {
                       Custom Main Nav Functionality
   **************************************************************************/
 
-  //Add 'selected' class to top nav links and submenu links 
-    //The class will add a bottom border to indicate current pages nav parent
-  /*
-  $('#DeltaTopNavigation li.dynamic-children a').each(function (index, value) {
-    if(window.location.href.indexOf($(value).attr('href')) > -1) {
-      $(value)
-        .addClass('selected')
-        .closest('li.dynamic-children').addClass('selected');
+  //Add classes to top nav items so CSS can be used to indicate where the active page lives in the nav 
+  $('#DeltaTopNavigation li a').each(function (index, value) {
+    
+    if(window.location.href.indexOf(value.href) > -1 || (window.location.href.indexOf(value.href.split('/').slice(3,4)[0]) > -1 && value.href.split('/').slice(3,4)[0] !== 'Pages')) {
+      $(value).addClass('active-nav-link');
+    } 
+
+  });
+  
+  $('#DeltaTopNavigation a.active-nav-link').each(function (index,value) {
+    if(index === 0) {
+      $(value).closest('li.static').addClass('active-nav-item');
     }
   });
-  */
 
   
   
