@@ -82,7 +82,7 @@ $(document).ready(function() {
   }
 
   //Breadcrumb is only shown if it isn't the site root page  
-  if(window.location.href.indexOf('home') > -1 || window.location.href.indexOf('.edu/Lists') > -1) {
+  if(window.location.href.indexOf('home') > -1 || window.location.href.indexOf('.edu/Lists') > -1 || window.location.href === "https://mycon.ucdenver.edu/") {
     return;
   } else {
     $('#breadcrumbContainer').show();
