@@ -102,7 +102,8 @@ $(document).ready(function() {
         contactEmails = [
           {"filter": "Academic%20Programs", "email": "nursing.academics@ucdenver.edu"},
           {"filter": "Faculty%20Affairs", "email": "con.facultyaffairs@ucdenver.edu"},
-          {"filter": "Human%20Resources", "email": "con.hr@ucdenver.edu"}
+          {"filter": "Human%20Resources", "email": "con.hr@ucdenver.edu"},
+          {"filter": "Finance", "email": "con.finance@ucdenver.edu"}
         ];
 
     if(currentUrl.indexOf('?') > -1) {
