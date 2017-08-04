@@ -9,8 +9,11 @@ $(document).ready(function() {
     //https://social.msdn.microsoft.com/Forums/office/en-US/d7ed7986-4f2d-4a13-b0e3-e23260988351/sharepoint-2013-rest-api-filter-by-a-choice-field-value?forum=appsforsharepoint
 
     //URL filter query suffix = ?$filter=Team eq 'Marketing'
-    var listUrl = "/test/_api/web/lists/GetByTitle('Test Directory')/items",
+    var chosenTeam,
+        listUrl = "/test/_api/web/lists/GetByTitle('Test Directory')/items",
         allStaff = [],
+        filteredTeam = [],
+        activeFilter = 'All',
         teams = [];
 
     /**************************************************************************
@@ -28,9 +31,13 @@ $(document).ready(function() {
     function getOffice(x) {
       return x.office ? ('<span>Office: Ed2 North, Room ' + x.office + '</span>') : '';
     }
+    
+    function cleanStaffContainer() {
+      $('#staffDirectory').html('');
+    };
 
     function buildStaffList(staff) {
-      $('#staffDirectory').html('');
+      cleanStaffContainer();
       $.each(staff, function(index, value) {
         createStaffCard(value);
       });
@@ -117,13 +124,29 @@ $(document).ready(function() {
         $('#directoryFilter').append(filter);
       });
       
-      $('#directoryFilter input').click(function() {
-        //Need variable for selected filter so nothing happens when filter clicked twice
-        //Recreate staff cards to only display filtered team
+      //Recreate staff cards to only display filtered team
           //Create separate array for filtered staff
           //Order team based on team order value
           //When reset to all, rebuild all staff by using all staff list and resort alphabetically
-        console.log(this.value);
+      $('#directoryFilter input').click(function() {
+
+        if(activeFilter !== this.value) {
+          chosenTeam = this.value;
+          
+          if(chosenTeam === 'All') {
+            buildStaffList(allStaff);
+          } else {
+            cleanStaffContainer();
+            $.each(allStaff, function(index, value) {
+              if(value.team === chosenTeam) {
+                createStaffCard(value);
+              }
+            });
+          } 
+          
+          activeFilter = chosenTeam;
+        }
+
       });
     }
     
