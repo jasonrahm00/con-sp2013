@@ -12,7 +12,6 @@ $(document).ready(function() {
     var chosenTeam,
         listUrl = "/test/_api/web/lists/GetByTitle('Test Directory')/items",
         allStaff = [],
-        filteredTeam = [],
         activeFilter = 'All',
         teams = [];
 
@@ -30,6 +29,10 @@ $(document).ready(function() {
 
     function getOffice(x) {
       return x.office ? ('<span>Office: Ed2 North, Room ' + x.office + '</span>') : '';
+    }
+    
+    function getDuties(x) {
+      return x.duties ? ('<section class="duties"><h3>Duties</h3>' + x.duties + '</section>') : '';
     }
     
     function cleanStaffContainer() {
@@ -54,7 +57,7 @@ $(document).ready(function() {
       staffCard += '<span>Phone: ' + person.phone + '</span>';
       staffCard += '<span>Email: <a href="mailto:' + person.email + '">' + person.email + '</a></span>';
       staffCard += '</header>';
-      staffCard += '<section class="duties"><h3>Duties</h3>' + (person.duties ? person.duties : '') + '</section>';
+      staffCard += getDuties(person);
       staffCard+= '</section>';
 
       $('#staffDirectory').append(staffCard);
@@ -112,27 +115,23 @@ $(document).ready(function() {
       $.each(data.d.results, function(index, value) {
         teams.push(value.Value);
       });
+      teams.sort();
       createFilter();
     });
     
     //Dynamically create filter based on teams array
     function createFilter() {
-      $('#directoryFilter').html('<label>All Staff<input type="radio" name="staffFilter" value="All" checked></label>');
+      $('#directoryFilter').html('<label for="teamFilter">Filter by Team</label><select name="teamFilter"><option selected>All</option></select>');
       
       $.each(teams, function(index, value) {
-        var filter = '<label>' + value + '<input type="radio" name="staffFilter" value="' + value + '"></label>';
-        $('#directoryFilter').append(filter);
+        $('#directoryFilter select').append('<option value="' + value + '">' + value + '</option>');
       });
       
-      //Recreate staff cards to only display filtered team
-          //Create separate array for filtered staff
-          //Order team based on team order value
-          //When reset to all, rebuild all staff by using all staff list and resort alphabetically
-      $('#directoryFilter input').click(function() {
+      //Add click event to newly created filters that recreate staff cards to only display filtered team
+      $('#directoryFilter select').change(function() {
 
         if(activeFilter !== this.value) {
           chosenTeam = this.value;
-          
           if(chosenTeam === 'All') {
             buildStaffList(allStaff);
           } else {
