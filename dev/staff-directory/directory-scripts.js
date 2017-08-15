@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     //URL filter query suffix = ?$filter=Team eq 'Marketing'
     var chosenTeam,
-        listUrl = "/test/_api/web/lists/GetByTitle('Test Directory')/items",
+        listUrl = "/_api/web/lists/GetByTitle('Staff Directory')/items",
         allStaff = [],
         activeFilter = 'All',
         teams = [];
@@ -32,7 +32,11 @@ $(document).ready(function() {
     }
     
     function getDuties(x) {
-      return x.duties ? ('<section class="duties"><h3>Duties</h3>' + x.duties + '</section>') : '';
+      if(x.duties) {
+        return '<section class="duties"><h3>Duties</h3>' + x.duties + '</section>';
+      } else {
+        return '<section class="duties"><h3>Duties</h3></section>';
+      }
     }
     
     function cleanStaffContainer() {
@@ -111,7 +115,7 @@ $(document).ready(function() {
     **************************************************************************/
     
     //Get Teams
-    $.getJSON('https://mycon.ucdenver.edu/test/_vti_bin/listdata.svc/TestDirectoryTeam', function(data) {
+    $.getJSON('https://mycon.ucdenver.edu/_vti_bin/listdata.svc/StaffDirectoryTeam', function(data) {
       $.each(data.d.results, function(index, value) {
         teams.push(value.Value);
       });
