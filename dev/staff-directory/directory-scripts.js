@@ -19,12 +19,18 @@ $(document).ready(function() {
                           Creating Staff Entries
     **************************************************************************/
     
+    //Called when JSON Object created
     function getHeadshotUrl(x) {
       return x.Headshot ? x.Headshot.Url : null;
     }
-
-    function addHeadshotUrl(x) {
-      return x.headshot ? x.headshot : "/PublishingImages/headshots/blank-profile.png";
+    
+    //Adds headshot to staff card if available, else adds silhouette 
+    function addHeadshot(x) {
+      if(x.headshot) {
+        return '<img src="' + x.headshot + '" alt="' + x.firstName + ' ' + x.lastName + ' Headshot">';
+      } else {
+        return '<img src="/PublishingImages/headshots/blank-profile.png" alt="Headshot Silhouette">';
+      }
     }
 
     function getOffice(x) {
@@ -53,7 +59,7 @@ $(document).ready(function() {
     function createStaffCard(person) {
 
       var staffCard = '<section>';
-      staffCard += '<div class="image-container"><img src="' + addHeadshotUrl(person) + '" alt="" ></div>';
+      staffCard += '<div class="image-container">' + addHeadshot(person) + '</div>';
       staffCard += '<header class="staff-contact">'; 
       staffCard += '<h2>' + person.fullName + '</h2>';
       staffCard += '<em>' + person.jobTitle + '</em>';
