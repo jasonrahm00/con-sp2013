@@ -110,24 +110,35 @@ $(document).ready(function() {
             }
           )
         });
-
-        buildStaffList(allStaff);
-
+        
+        //Get Teams
+        $.ajax({
+          url: 'https://mycon.ucdenver.edu/_vti_bin/listdata.svc/StaffDirectoryTeam',
+          type: "GET",
+          headers: {
+            "accept": "application/json;odata=verbose"
+          }
+        })
+        .success(function (data) {
+          $.each(data.d.results, function(index, value) {
+            teams.push(value.Value);
+          });
+          teams.sort();
+          createFilter();
+          buildStaffList(allStaff);
+        })
+        .error(function (err) {
+          console.log('Team List Call Error: ' + err);
+        });
+      })
+      .error(function(err){
+        console.log('Directory List Call Error: ' + err);
       });
     });
     
     /**************************************************************************
                           Staff Directory Filtering
     **************************************************************************/
-    
-    //Get Teams
-    $.getJSON('https://mycon.ucdenver.edu/_vti_bin/listdata.svc/StaffDirectoryTeam', function(data) {
-      $.each(data.d.results, function(index, value) {
-        teams.push(value.Value);
-      });
-      teams.sort();
-      createFilter();
-    });
     
     //Dynamically create filter based on teams array
     function createFilter() {
@@ -152,7 +163,6 @@ $(document).ready(function() {
               }
             });
           } 
-          
           activeFilter = chosenTeam;
         }
 
