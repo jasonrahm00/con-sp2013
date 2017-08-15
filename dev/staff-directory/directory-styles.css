@@ -4,6 +4,16 @@
 
 **********************************************************/
 
+#directoryFilter label {
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+
+#directoryFilter option:active, 
+#directoryFilter option:hover {
+  background-color: #cfb87c;
+}
+
 #staffDirectory>section {
   border-bottom: 1px solid #ddd;
   display: flex;
