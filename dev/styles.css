@@ -1,4 +1,6 @@
-
+*:focus {
+  outline: 0;
+}
 
 a.button,
 .print-accordion {
@@ -20,10 +22,6 @@ a.button:hover,
   color: #cfb87c;
   cursor: pointer;
   text-decoration: none;
-}
-
-.print-accordion:focus {
-  outline: none;
 }
 
 body, 
@@ -76,6 +74,10 @@ h1 {
 section {
   margin-bottom: 1rem;
   margin-top: 1rem;
+}
+
+select:focus {
+  border: 1px solid #bbb; 
 }
 
 ul.no-bullets {
@@ -255,13 +257,6 @@ nav .ms-core-listMenu-root>li.static>ul>li {
 
 input.ms-long {
   width: 100% !important;
-}
-
-li.static:focus,
-li.static span:focus,
-.menu-item:focus,
-.menu-item-text:focus {
-  outline: none;
 }
 
 li.ms-navedit-editArea {
