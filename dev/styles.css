@@ -105,25 +105,6 @@ ul.no-bullets {
   display: none;
 }
 
-.home-page-image {
-  background-image: url("/PublishingImages/ed2-north-exterior.jpg");
-}
-
-.home-page-image,
-.home-page-image h2{
-  color: #fff;
-  letter-spacing: 1px;
-  text-shadow:
-    -1px -1px 0 #000, 
-    1px -1px 0 #000, 
-    -1px 1px 0 #000, 
-    1px 1px 0 #000;
-}
-
-.home-page-image strong {
-  color: #cfb87c;
-}
-
 #breadcrumbContainer a:link,
 #breadcrumbContainer a:visited,
 #DeltaPlaceHolderMain a:link,
