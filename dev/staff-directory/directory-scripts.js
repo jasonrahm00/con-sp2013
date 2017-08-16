@@ -1,52 +1,14 @@
 $(document).ready(function () {
   
   /**************************************************************************
-                     Global Functions and Variables
+                     Functions and Variables
   **************************************************************************/
-  var chosenTeam,
-      activeFilter = 'All',
-      teams = [];
-    
-  /************************** Creating Staff Entries **************************/
-
-  //Adds headshot to staff card if available, else adds silhouette 
-  function addHeadshot(x) {
-    if(x.headshot) {
-      return '<img src="' + x.headshot + '" alt="' + x.firstName + ' ' + x.lastName + ' Headshot">';
-    } else {
-      return '<img src="/PublishingImages/headshots/blank-profile.png" alt="Headshot Silhouette">';
-    }
-  }
   
-  function getOffice(x) {
-    return x.office ? ('<span>Office: Ed2 North, Room ' + x.office + '</span>') : '';
-  }
+  var activeFilter = 'All';
+      
 
-  function getDuties(x) {
-    if(x.duties) {
-      return '<section class="duties"><h3>Duties</h3>' + x.duties + '</section>';
-    } else {
-      return '<section class="duties"><h3>Duties</h3></section>';
-    }
-  }
-
-  function cleanStaffContainer() {
-    $('#directory').html('');
-  };
-
-  function buildStaffList(staff) {
-    cleanStaffContainer();
-    $.each(staff, function(index, value) {
-      createStaffCard(value);
-    });
-    $('#loadingMessage').remove();
-    $('#directoryContainer').removeClass('hidden');
-  }
-
-  function getCredentials(x) {
-    return x.credentials ? (', ' + x.credentials) : ''; 
-  }
-
+  /************************** Creating Staff Entries **************************/
+  
   function createStaffCard(person) {
 
     var staffCard = '<section>';
@@ -65,6 +27,17 @@ $(document).ready(function () {
 
   }
 
+  function buildStaffList(staff) {
+    cleanContainer();
+    $.each(staff, function(index, value) {
+      createStaffCard(value);
+    });
+    $('#loadingMessage').remove();
+    $('#directoryContainer').removeClass('hidden');
+  }
+  
+  
+  
   /**************************************************************************
                         Staff Directory Filtering
   **************************************************************************/
@@ -79,13 +52,15 @@ $(document).ready(function () {
 
     //Add click event to newly created filters that recreate staff cards to only display filtered team
     $('#directoryFilter select').change(function() {
-
+      
       if(activeFilter !== this.value) {
+        
         chosenTeam = this.value;
+        
         if(chosenTeam === 'All') {
           buildStaffList(allStaff);
         } else {
-          cleanStaffContainer();
+          cleanContainer();
           $.each(allStaff, function(index, value) {
             if(value.team === chosenTeam) {
               createStaffCard(value);
@@ -97,37 +72,21 @@ $(document).ready(function () {
 
     });
   }
+
+  
   
   /**************************************************************************
                           Staff Directory Scripts
   **************************************************************************/
 
-    
   //Get Teams
-    //Build cards upon success
-  $(function() {
+  //Build cards upon success
 
-    $.ajax({
-      url: staffTeamListUrl,
-      type: "GET",
-      headers: {
-        "accept": "application/json;odata=verbose"
-      }
-    })
-    .success(function (data) {
-      $.each(data.d.results, function(index, value) {
-        teams.push(value.Value);
-      });
-      teams.sort();
+  getDirectoryData()
+    .then(getTeamList)
+    .then(function() {
       createFilter();
       buildStaffList(allStaff);
-    })
-    .error(function (err) {
-      $('#loadingMessage').remove();
-      $('#directoryContainer').html('<h2 class="center">Data load error</h2>').removeClass('hidden');
-      console.log('Team List Call Error: ' + err);
-    });
-
   });
-
+  
 });
