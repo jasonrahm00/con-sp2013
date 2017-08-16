@@ -14,42 +14,50 @@
   background-color: #cfb87c;
 }
 
-#staffDirectory>section {
+#directory>section {
   border-bottom: 1px solid #ddd;
   display: flex;
   margin-bottom: 2rem;
   padding-bottom: 2rem;
 }
 
-#staffDirectory>section:last-child {
+#directory>section:last-child {
   border-bottom: 0;
   margin-bottom: 0;
 }
 
-#staffDirectory>section>section {
+#directory>section>section {
   margin: 0;
   width: 65%;
 }
 
-#staffDirectory h2 {
+#directory h2 {
   margin-bottom: .25rem;
 }
 
-#staffDirectory img {
+#directory .image-container {
+  margin-right: 5%;
+}
+
+#directory img {
   height: auto;
   max-width: 150px;
 }
 
-#staffDirectory .staff-contact {
+#directory .staff-contact {
   margin-right: 2%;
   width: 30%;
 }
 
-#staffDirectory .staff-contact>* {
+#directory .staff-contact>* {
   display: block;
 }
 
-#staffDirectory .staff-contact em {
+#directory .staff-contact em {
   font-size: 1rem;
   margin-bottom: 1rem;
+}
+
+#pageTitle {
+  display: none;
 }

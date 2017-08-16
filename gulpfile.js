@@ -38,6 +38,28 @@ gulp.task('compile', function(callback) {
 
 
 /*********************************************
+            Directory Tasks
+*********************************************/
+
+gulp.task('minify-dir-scripts', function() {
+  return gulp.src(['dev/staff-directory/*.js'])
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/live'))
+});
+
+gulp.task('minify-dir-css', function() {
+  return gulp.src(['dev/staff-directory/*.css'])
+    .pipe(cssnano())
+    .pipe(gulp.dest('dist/live'))
+});
+
+gulp.task('compile-directory', function(callback) {
+  runSequence('clean:dist', ['minify-dir-scripts', 'minify-dir-css'], callback);
+});
+
+
+
+/*********************************************
             Test Site Tasks
 *********************************************/
 
