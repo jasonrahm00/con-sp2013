@@ -28,6 +28,7 @@
 
 #staffDirectory>section>section {
   margin: 0;
+  width: 65%;
 }
 
 #staffDirectory h2 {
@@ -40,7 +41,8 @@
 }
 
 #staffDirectory .staff-contact {
-  min-width: 30%;
+  margin-right: 2%;
+  width: 30%;
 }
 
 #staffDirectory .staff-contact>* {
@@ -51,4 +53,3 @@
   font-size: 1rem;
   margin-bottom: 1rem;
 }
-

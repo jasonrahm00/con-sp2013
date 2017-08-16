@@ -140,6 +140,35 @@ ul.no-bullets {
 
 /**********************************************************
     
+               Loading Spinner
+
+**********************************************************/
+
+.spinner {
+  animation: spin 2s linear infinite;
+  border: 8px solid #e1e1e1;
+  border-radius: 50%;
+  border-top: 8px solid #cfb87c;
+  height: 40px;
+  left: 50%;
+  position: absolute;
+  width: 40px;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+/**********************************************************
+    
                Breadcrumb Styles
 
 **********************************************************/

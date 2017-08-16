@@ -54,6 +54,12 @@ $(document).ready(function() {
       $.each(staff, function(index, value) {
         createStaffCard(value);
       });
+      $('#loadingMessage').remove();
+      $('#directoryContainer').removeClass('hidden');
+    }
+    
+    function getCredentials(x) {
+      return x.credentials ? (', ' + x.credentials) : ''; 
     }
 
     function createStaffCard(person) {
@@ -61,7 +67,7 @@ $(document).ready(function() {
       var staffCard = '<section>';
       staffCard += '<div class="image-container">' + addHeadshot(person) + '</div>';
       staffCard += '<header class="staff-contact">'; 
-      staffCard += '<h2>' + person.fullName + '</h2>';
+      staffCard += '<h2>' + person.fullName + getCredentials(person) + '</h2>';
       staffCard += '<em>' + person.jobTitle + '</em>';
       staffCard += getOffice(person);
       staffCard += '<span>Phone: ' + person.phone + '</span>';
