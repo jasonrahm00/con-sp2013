@@ -1,146 +1,165 @@
 $(document).ready(function() {
   
   /**************************************************************************
+                     Global Functions and Variables
+  **************************************************************************/
+  
+  var staffListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Staff Directory')/items",
+      staffTeamListUrl = "https://mycon.ucdenver.edu/_vti_bin/listdata.svc/StaffDirectoryTeam";
+  
+  //Reusable ajax call that returns promise with table data info
+    //https://social.msdn.microsoft.com/Forums/office/en-US/d7ed7986-4f2d-4a13-b0e3-e23260988351/sharepoint-2013-rest-api-filter-by-a-choice-field-value?forum=appsforsharepoint
+    //URL filter query suffix = ?$filter=Team eq 'Marketing'
+  function getDirectoryData() {
+    
+    return new Promise(function(resolve, reject) {
+      
+     $.ajax({
+        url: staffListUrl,
+        type: "GET",
+        headers: {
+          "accept": "application/json;odata=verbose"
+        }
+      })
+      .success(function(data) {
+        resolve(data);
+      })
+     .error(function(err) {
+        $('#loadingMessage').remove();
+        $('#directoryContainer').html('<h2 class="center">Data load error</h2>').removeClass('hidden');
+        console.log('Directory List Call Error: ' + err);
+        reject(err);
+      });
+      
+    });
+  }
+  
+  /************************** Creating Staff Entries **************************/
+
+  //Called when JSON Object created
+  function getHeadshotUrl(x) {
+    return x.Headshot ? x.Headshot.Url : null;
+  }
+
+  //Adds headshot to staff card if available, else adds silhouette 
+  function addHeadshot(x) {
+    if(x.headshot) {
+      return '<img src="' + x.headshot + '" alt="' + x.firstName + ' ' + x.lastName + ' Headshot">';
+    } else {
+      return '<img src="/PublishingImages/headshots/blank-profile.png" alt="Headshot Silhouette">';
+    }
+  }
+
+  function getOffice(x) {
+    return x.office ? ('<span>Office: Ed2 North, Room ' + x.office + '</span>') : '';
+  }
+
+  function getDuties(x) {
+    if(x.duties) {
+      return '<section class="duties"><h3>Duties</h3>' + x.duties + '</section>';
+    } else {
+      return '<section class="duties"><h3>Duties</h3></section>';
+    }
+  }
+
+  function cleanStaffContainer() {
+    $('#staffDirectory').html('');
+  };
+
+  function buildStaffList(staff) {
+    cleanStaffContainer();
+    $.each(staff, function(index, value) {
+      createStaffCard(value);
+    });
+    $('#loadingMessage').remove();
+    $('#directoryContainer').removeClass('hidden');
+  }
+
+  function getCredentials(x) {
+    return x.credentials ? (', ' + x.credentials) : ''; 
+  }
+
+  function createStaffCard(person) {
+
+    var staffCard = '<section>';
+    staffCard += '<div class="image-container">' + addHeadshot(person) + '</div>';
+    staffCard += '<header class="staff-contact">'; 
+    staffCard += '<h2>' + person.fullName + getCredentials(person) + '</h2>';
+    staffCard += '<em>' + person.jobTitle + '</em>';
+    staffCard += getOffice(person);
+    staffCard += '<span>Phone: ' + person.phone + '</span>';
+    staffCard += '<span>Email: <a href="mailto:' + person.email + '">' + person.email + '</a></span>';
+    staffCard += '</header>';
+    staffCard += getDuties(person);
+    staffCard+= '</section>';
+
+    $('#staffDirectory').append(staffCard);
+
+  }
+  
+  /**************************************************************************
                           Staff Directory Scripts
   **************************************************************************/
 
   if($("#staffDirectory")) {
-  
-    //https://social.msdn.microsoft.com/Forums/office/en-US/d7ed7986-4f2d-4a13-b0e3-e23260988351/sharepoint-2013-rest-api-filter-by-a-choice-field-value?forum=appsforsharepoint
 
-    //URL filter query suffix = ?$filter=Team eq 'Marketing'
     var chosenTeam,
-        listUrl = "/_api/web/lists/GetByTitle('Staff Directory')/items",
         allStaff = [],
         activeFilter = 'All',
         teams = [];
 
-    /**************************************************************************
-                          Creating Staff Entries
-    **************************************************************************/
-    
-    //Called when JSON Object created
-    function getHeadshotUrl(x) {
-      return x.Headshot ? x.Headshot.Url : null;
-    }
-    
-    //Adds headshot to staff card if available, else adds silhouette 
-    function addHeadshot(x) {
-      if(x.headshot) {
-        return '<img src="' + x.headshot + '" alt="' + x.firstName + ' ' + x.lastName + ' Headshot">';
-      } else {
-        return '<img src="/PublishingImages/headshots/blank-profile.png" alt="Headshot Silhouette">';
-      }
-    }
-
-    function getOffice(x) {
-      return x.office ? ('<span>Office: Ed2 North, Room ' + x.office + '</span>') : '';
-    }
-    
-    function getDuties(x) {
-      if(x.duties) {
-        return '<section class="duties"><h3>Duties</h3>' + x.duties + '</section>';
-      } else {
-        return '<section class="duties"><h3>Duties</h3></section>';
-      }
-    }
-    
-    function cleanStaffContainer() {
-      $('#staffDirectory').html('');
-    };
-
-    function buildStaffList(staff) {
-      cleanStaffContainer();
-      $.each(staff, function(index, value) {
-        createStaffCard(value);
+    getDirectoryData().then(function(data) {
+      
+      data.d.results.sort(function(a, b) {
+        return (a.Last_Name > b.Last_Name) ? 1 : ((b.Last_Name > a.Last_Name) ? -1 : 0);
       });
-      $('#loadingMessage').remove();
-      $('#directoryContainer').removeClass('hidden');
-    }
-    
-    function getCredentials(x) {
-      return x.credentials ? (', ' + x.credentials) : ''; 
-    }
+      
+      $.each(data.d.results, function(index, value) {
+        allStaff.push(
+          {
+            firstName: value.First_Name,
+            lastName: value.Last_Name,
+            fullName: value.First_Name + ' ' + value.Last_Name,
+            credentials: value.Credentials,
+            jobTitle: value.Job_Title,
+            phone: value.Phone,
+            email: value.Email,
+            office: value.Office_Number,
+            team: value.Team,
+            duties: value.Job_Duties,
+            committees: value.Committee_Membership,
+            committeeRole: value.Committee_Role,
+            statement: value.Additional_Statement,
+            headshot: getHeadshotUrl(value)
+          }
+        );
 
-    function createStaffCard(person) {
-
-      var staffCard = '<section>';
-      staffCard += '<div class="image-container">' + addHeadshot(person) + '</div>';
-      staffCard += '<header class="staff-contact">'; 
-      staffCard += '<h2>' + person.fullName + getCredentials(person) + '</h2>';
-      staffCard += '<em>' + person.jobTitle + '</em>';
-      staffCard += getOffice(person);
-      staffCard += '<span>Phone: ' + person.phone + '</span>';
-      staffCard += '<span>Email: <a href="mailto:' + person.email + '">' + person.email + '</a></span>';
-      staffCard += '</header>';
-      staffCard += getDuties(person);
-      staffCard+= '</section>';
-
-      $('#staffDirectory').append(staffCard);
-
-    }
-
-    //Get all staff from sharepoint list, create object for each entry and push to allStaff array
-    $(function() {
+      });
+      
+      //Get Teams
       $.ajax({
-        url: listUrl,
+        url: staffTeamListUrl,
         type: "GET",
         headers: {
           "accept": "application/json;odata=verbose"
         }
       })
       .success(function (data) {
-        results = data.d.results;
-
-        results.sort(function(a, b) {
-          return (a.Last_Name > b.Last_Name) ? 1 : ((b.Last_Name > a.Last_Name) ? -1 : 0);
-        });
-
         $.each(data.d.results, function(index, value) {
-          allStaff.push(
-            {
-              firstName: value.First_Name,
-              lastName: value.Last_Name,
-              fullName: value.First_Name + ' ' + value.Last_Name,
-              credentials: value.Credentials,
-              jobTitle: value.Job_Title,
-              phone: value.Phone,
-              email: value.Email,
-              office: value.Office_Number,
-              team: value.Team,
-              duties: value.Job_Duties,
-              committees: value.Committee_Membership,
-              committeeRole: value.Committee_Role,
-              statement: value.Additional_Statement,
-              headshot: getHeadshotUrl(value)
-            }
-          )
+          teams.push(value.Value);
         });
-        
-        //Get Teams
-        $.ajax({
-          url: 'https://mycon.ucdenver.edu/_vti_bin/listdata.svc/StaffDirectoryTeam',
-          type: "GET",
-          headers: {
-            "accept": "application/json;odata=verbose"
-          }
-        })
-        .success(function (data) {
-          $.each(data.d.results, function(index, value) {
-            teams.push(value.Value);
-          });
-          teams.sort();
-          createFilter();
-          buildStaffList(allStaff);
-        })
-        .error(function (err) {
-          console.log('Team List Call Error: ' + err);
-        });
+        teams.sort();
+        createFilter();
+        buildStaffList(allStaff);
       })
-      .error(function(err){
-        console.log('Directory List Call Error: ' + err);
+      .error(function (err) {
+        $('#loadingMessage').remove();
+        $('#directoryContainer').html('<h2 class="center">Data load error</h2>').removeClass('hidden');
+        console.log('Team List Call Error: ' + err);
       });
     });
+
+    
     
     /**************************************************************************
                           Staff Directory Filtering
