@@ -4,29 +4,30 @@ $(document).ready(function () {
                      Functions and Variables
   **************************************************************************/
   
-  var activeFilter = 'All';
-      
+  var activeFilter = 'All';    
 
   /************************** Creating Staff Entries **************************/
   
   function createStaffCard(person) {
 
     var staffCard = '<section>';
-    staffCard += '<div class="image-container">' + addHeadshot(person) + '</div>';
-    staffCard += '<header class="staff-contact">'; 
-    staffCard += '<h2>' + person.fullName + getCredentials(person) + '</h2>';
-    staffCard += '<em>' + person.jobTitle + '</em>';
-    staffCard += getOffice(person);
-    staffCard += '<span>Phone: ' + person.phone + '</span>';
-    staffCard += '<span>Email: <a href="mailto:' + person.email + '">' + person.email + '</a></span>';
-    staffCard += '</header>';
-    staffCard += getDuties(person);
-    staffCard+= '</section>';
+        staffCard += '<div class="image-container">' + addHeadshot(person) + '</div>';
+        staffCard += '<header class="staff-contact">'; 
+        staffCard += '<h2>' + person.fullName + getCredentials(person) + '</h2>';
+        staffCard += '<em>' + person.jobTitle + '</em>';
+        staffCard += getOffice(person);
+        staffCard += '<span>Phone: ' + person.phone + '</span>';
+        staffCard += '<span>Email: <a href="mailto:' + person.email + '">' + person.email + '</a></span>';
+        staffCard += '</header>';
+        staffCard += getDuties(person);
+        staffCard += '</section>';  
 
     $('#directory').append(staffCard);
 
   }
 
+  //Build list of entire staff by passing in allStaff array
+    //Called on initial load and if select option 'All' is chosen
   function buildStaffList(staff) {
     cleanContainer();
     $.each(staff, function(index, value) {
@@ -79,14 +80,18 @@ $(document).ready(function () {
                           Staff Directory Scripts
   **************************************************************************/
 
-  //Get Teams
-  //Build cards upon success
-
+  //Promise chain used on initial page load
+    //First method calls loads the staff directory list data and creates JSON object for each entry
+    //First .then() calls getTeamList method which creates an array of teams from the dropdown choice in the directory list
+    //Second .then() executes the createFilter and buildStaffList functions to build the entire staff list
+    //Upon completion
+      //The full staff list and filter are visible on the page
+      //The allStaff object array is available to dynamically filter the list in the page without additional api calls
   getDirectoryData()
     .then(getTeamList)
     .then(function() {
       createFilter();
       buildStaffList(allStaff);
   });
-  
+
 });

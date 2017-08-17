@@ -8,15 +8,17 @@ var allStaff = [],
     staffTeamListUrl = "https://mycon.ucdenver.edu/_vti_bin/listdata.svc/StaffDirectoryTeam",
     teams = [];
 
-function getHeadshotUrl(x) {
-  return x.Headshot ? x.Headshot.Url : null;
-}
-
+//Clears out directory container whenever called
 function cleanContainer() {
   $('#directory').html('');
 }
 
-//Adds headshot to staff card if available, else adds silhouette 
+//Test whether a headshot url is present in the list object
+function getHeadshotUrl(x) {
+  return x.Headshot ? x.Headshot.Url : null;
+}
+
+//Returns image element with staff headshot if available, else returns a silhouette image
 function addHeadshot(x) {
   if(x.headshot) {
     return '<img src="' + x.headshot + '" alt="' + x.firstName + ' ' + x.lastName + ' Headshot">';
@@ -25,10 +27,12 @@ function addHeadshot(x) {
   }
 }
 
+//Return element with office number if available, else returns nothing and no office number is added to the card
 function getOffice(x) {
   return x.office ? ('<span>Office: Ed2 North, Room ' + x.office + '</span>') : '';
 }
 
+//Returns list of duties if available, else returns just the section and header
 function getDuties(x) {
   if(x.duties) {
     return '<section class="duties"><h3>Duties</h3>' + x.duties + '</section>';
@@ -37,6 +41,7 @@ function getDuties(x) {
   }
 }
 
+//Returns credentials text if avialable for addition to person's name, else nothing is added to the name
 function getCredentials(x) {
   return x.credentials ? (', ' + x.credentials) : ''; 
 }
@@ -47,13 +52,15 @@ function getCredentials(x) {
                      Promise Methods
 **************************************************************************/
 
-//Reusable ajax call that returns promise with table data info
+//Reusable ajax that return promises which are used to build the initial staff list on page load (or return errors)
   //Sharepoint List API Call: https://social.msdn.microsoft.com/Forums/office/en-US/d7ed7986-4f2d-4a13-b0e3-e23260988351/sharepoint-2013-rest-api-filter-by-a-choice-field-value?forum=appsforsharepoint
   //Promise Chaining: https://html5hive.org/how-to-chain-javascript-promises/
   //URL filter query suffix = ?$filter=Team eq 'Marketing'
   
+//Ajax call to staff directory list
 var getDirectoryData = function() {
 
+  //Promise is created to sycnhronize actions when the page initially loads 
   return new Promise(function(resolve, reject) {
     $.ajax({
       url: staffListUrl,
@@ -63,10 +70,12 @@ var getDirectoryData = function() {
       }
     })
     .success(function(data) {
+      //Upon success, the list data alpha sorted
       data.d.results.sort(function(a, b) {
         return (a.Last_Name > b.Last_Name) ? 1 : ((b.Last_Name > a.Last_Name) ? -1 : 0);
       });
-
+        
+      //Each item is turned into a JSON Object and pushed into the allStaff array
       $.each(data.d.results, function(index, value) {
         allStaff.push(
           {
@@ -89,12 +98,14 @@ var getDirectoryData = function() {
 
       });
       
+      //After data is sorted and object created, the promise resolves so the next action can occur
       resolve();
       
     })
    .error(function(err) {
-      $('#loadingMessage').remove();
-      $('#directoryContainer').html('<h2 class="center">Data load error</h2>').removeClass('hidden');
+      //If there's an error at this point, the promise is rejected and the following messaging appears
+      $('#directoryContainer').remove();
+      $('#loadingMessage').html('<h2 class="center">Directory failed to load</h2>');
       console.log('Directory List Call Error: ' + err);
       reject();
     });
@@ -103,8 +114,11 @@ var getDirectoryData = function() {
 
 };
 
+//Ajax call to the list of choices in the 'Team' dropdown within the list
+  //For whatever reason, this has to be called separately from Sharepoint as opposed to it being a simple array to begin with 
 var getTeamList = function() {
 
+  //Promise created to handle the ajax call
   return new Promise(function(resolve, reject) {
     $.ajax({
       url: staffTeamListUrl,
@@ -114,17 +128,19 @@ var getTeamList = function() {
       }
     })
     .success(function (data) {
+      //Upon success, the data (an array of strings) is pushed into the teams array
       $.each(data.d.results, function(index, value) {
         teams.push(value.Value);
       });
-      teams.sort();
-      resolve();
+      teams.sort(); //Teams arrays sorted (default sort is alpha)
+      resolve();  //Promise resolved so
     })
     .error(function (err) {
-      $('#loadingMessage').remove();
-      $('#directoryContainer').html('<h2 class="center">Data load error</h2>').removeClass('hidden');
+      //If there's an error loading the team list, the following messaging appears and the promise is rejected
+      $('#directoryContainer').remove();
+      $('#loadingMessage').html('<h2 class="center">Directory failed to load</h2>');
       console.log('Team List Call Error: ' + err);
-      reject(err);
+      reject();
     });
   });
   
