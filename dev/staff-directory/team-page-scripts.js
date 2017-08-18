@@ -6,3 +6,5 @@
 //hidden dropdown?
 //H1 text == team name?
 //URL indexof?
+
+/******* Probably best to do a data object on the main container that is the string of team name ********/
