@@ -456,6 +456,10 @@ li.ms-navedit-editArea {
   justify-content: space-between;
 }
 
+.evenly {
+  justify-content: space-evenly;
+}
+
 .flex-column {
   flex-direction: column;
 }
