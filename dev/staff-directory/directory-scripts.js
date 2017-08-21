@@ -87,6 +87,7 @@ $(document).ready(function () {
     //Upon completion
       //The full staff list and filter are visible on the page
       //The allStaff object array is available to dynamically filter the list in the page without additional api calls
+
   getDirectoryData()
     .then(getTeamList)
     .then(function() {

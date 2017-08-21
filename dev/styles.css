@@ -125,14 +125,18 @@ ul.no-bullets {
 
 **********************************************************/
 
+#loadingMessage {
+  left: 50%;
+  position: absolute;
+}
+
 .spinner {
   animation: spin 2s linear infinite;
   border: 8px solid #e1e1e1;
   border-radius: 50%;
   border-top: 8px solid #cfb87c;
   height: 40px;
-  left: 50%;
-  position: absolute;
+  margin-left: 18px;
   width: 40px;
 }
 
