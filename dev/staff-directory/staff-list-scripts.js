@@ -102,12 +102,8 @@ var getDirectoryData = function() {
       resolve();
       
     })
-   .error(function(err) {
-      //If there's an error at this point, the promise is rejected and the following messaging appears
-      $('#directoryContainer').remove();
-      $('#loadingMessage').html('<h2 class="center">Directory failed to load</h2>');
-      console.log('Directory List Call Error: ' + err);
-      reject();
+   .error(function() {
+      reject('Error with getDirectoryData()');
     });
     
   });
@@ -135,12 +131,8 @@ var getTeamList = function() {
       teams.sort(); //Teams arrays sorted (default sort is alpha)
       resolve();  //Promise resolved so
     })
-    .error(function (err) {
-      //If there's an error loading the team list, the following messaging appears and the promise is rejected
-      $('#directoryContainer').remove();
-      $('#loadingMessage').html('<h2 class="center">Directory failed to load</h2>');
-      console.log('Team List Call Error: ' + err);
-      reject();
+    .error(function () {
+      reject('Error with getTeamList()');
     });
   });
   

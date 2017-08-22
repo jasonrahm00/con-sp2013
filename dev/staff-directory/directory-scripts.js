@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
   
   /**************************************************************************
                      Functions and Variables
@@ -93,6 +93,12 @@ $(document).ready(function () {
     .then(function() {
       createFilter();
       buildStaffList(allStaff);
+    })
+    .catch(function(reason) {
+      //If there's an error at this point, the promise is rejected and the following messaging appears
+      $('#directoryContainer').remove();
+      $('#loadingMessage').html('<h2 class="center">Directory failed to load</h2>');
+      console.log(reason);
   });
 
 });

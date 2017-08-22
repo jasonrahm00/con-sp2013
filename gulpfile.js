@@ -64,7 +64,7 @@ gulp.task('compile-directory', function(callback) {
 *********************************************/
 
 gulp.task('test-scripts', function() {
-  return gulp.src(['dev/staff-directory/*.js'])
+  return gulp.src(['dev/staff-directory/directory-refactor.js'])
     .pipe(rename('test-scripts.js'))
     .pipe(gulp.dest('dist/test'))
 });

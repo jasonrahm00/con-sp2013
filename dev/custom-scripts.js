@@ -11,7 +11,8 @@ $(document).ready(function() {
     $(value).html($(value)[0].textContent);
   });
   
-
+  
+  
   
   /**************************************************************************
                       Custom Main Nav Functionality
