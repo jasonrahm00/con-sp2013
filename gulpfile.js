@@ -38,6 +38,18 @@ gulp.task('compile', function(callback) {
 
 
 /*********************************************
+            Services Tasks
+*********************************************/
+
+gulp.task('service-scripts', function() {
+  return gulp.src(['dev/service-list/service-list-scripts.js'])
+    //.pipe(uglify())
+    .pipe(gulp.dest('dist/live'))
+})
+
+
+
+/*********************************************
             Directory Tasks
 *********************************************/
 
