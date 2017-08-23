@@ -4,46 +4,8 @@
 
 var serviceListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Services')/items?$top=200",
     emailListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Emails')/items",
-    teamListUrl = "https://mycon.ucdenver.edu/_vti_bin/listdata.svc/DepartmentServicesTeam",
-    services = [],
-    teams = [],
-    emails = [];
-
-
-
-/**************************************************************************
-                            Get Teams
-**************************************************************************/
-/*
-var getTeams = function() {
-  return new Promise(function(resolve, reject) {
-    $.ajax({
-      url: teamListUrl,
-      type: "GET",
-      headers: {
-        "accept": "application/json;odata=verbose"
-      }
-    })
-    .success(function(data) {
-      
-      $.each(data.d.results, function(index, value) {
-        services.push({
-          team: value.Value,
-          email: [],
-          serviceList: []
-        });
-      });
-      
-      //After data is sorted and object created, the promise resolves so the next action can occur
-      resolve();
-      
-    })
-   .error(function() {
-      reject('Error with getTeams()');
-    });
-  });
-};
-*/
+    emails = {},
+    services = [];
 
 
 
@@ -63,13 +25,15 @@ var getEmails = function() {
     })
     .success(function(data) {
 
-      $.each(data.d.results, function(index, value) {
-        for(var i = 0; i < services.length; i++) {
-          if(services[i].team === value.Title) {
-            services[i].email.push(value.Email.Description);
-          }
+      var results = data.d.results;
+      
+      for(var i = 0; i < results.length; i++) {
+        var teamName = results[i].Team;
+        if(!emails[teamName]) {
+          emails[teamName] = [];
         }
-      });
+        emails[teamName].push(results[i].Email.Description);
+      }
       
       //After data is sorted and object created, the promise resolves so the next action can occur
       resolve();
@@ -120,23 +84,9 @@ var getServices = function() {
         teams[teamName].push({service: results[i].Title, link: results[i].Link ? results[i].Link.Url : null})
       }
       
-      console.log(teams);
-      
       for(var teamName in teams) {
-        services.push({team: teamName, list: teams[teamName]});
+        services.push({team: teamName, list: teams[teamName], email: emails[teamName]});
       }
-      
-      /*
-      $.each(results, function(index, value) {
-        services.push(
-          {
-            team: value.Team,
-            service: value.Title,
-            link: value.Link ? value.Link.Url : null
-          }
-        )
-      });
-      */
       
       //After data is sorted and object created, the promise resolves so the next action can occur
       resolve();
@@ -155,8 +105,10 @@ var getServices = function() {
 **************************************************************************/
 
 $(document).ready(function() {
-  getServices()
+  getEmails()
+    .then(getServices)
     .then(function() {
+      console.log(emails);
       console.log(services);
     })
     .catch(function(reason) {
