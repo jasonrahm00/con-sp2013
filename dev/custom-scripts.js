@@ -1,3 +1,56 @@
+/**************************************************************************
+                            Get Team Contact
+**************************************************************************/
+
+var emailListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Emails')/items",
+    emails = {};
+
+//Run map on email list to add to services?
+var getTeamContact = function() {
+  return new Promise(function(resolve, reject) {
+    $.ajax({
+      url: emailListUrl,
+      type: "GET",
+      headers: {
+        "accept": "application/json;odata=verbose"
+      }
+    })
+    .success(function(data) {
+
+      var results = data.d.results;
+
+      for(var i = 0; i < results.length; i++) {
+        var teamName = results[i].Team;
+        if(!emails[teamName]) {
+          emails[teamName] = [];
+        }
+        emails[teamName].push(results[i].Email.Description);
+      }
+
+      for(var i = 0; i < results.length; i++) {
+        var teamName = results[i].Team;
+        if(!teamPage[teamName]) {
+          teamPage[teamName];
+        }
+        teamPage[teamName] = results[i].Department_Page ? results[i].Department_Page.Description : null;
+      }
+
+      //After data is sorted and object created, the promise resolves so the next action can occur
+      resolve();
+
+    })
+   .error(function() {
+      reject();
+    });
+  });
+};
+
+
+
+/**************************************************************************
+                        jQuery Dependant Actions
+**************************************************************************/
+
 $(document).ready(function() {
   
   //If there are custom content zones with empty containers, the zone is hidden from the page 

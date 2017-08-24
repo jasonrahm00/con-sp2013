@@ -43,10 +43,19 @@ gulp.task('compile', function(callback) {
 
 gulp.task('service-scripts', function() {
   return gulp.src(['dev/service-list/service-list-scripts.js'])
-    //.pipe(uglify())
-    .pipe(gulp.dest('dist/test'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/live'))
 });
 
+gulp.task('service-css', function() {
+  return gulp.src(['dev/service-list/service-list-styles.css'])
+    .pipe(cssnano())
+    .pipe(gulp.dest('dist/live'))
+});
+
+gulp.task('compile-services', function(callback) {
+  runSequence('clean:dist', ['service-scripts', 'service-css'], callback);
+});
 
 
 /*********************************************

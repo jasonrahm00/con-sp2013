@@ -1,0 +1,14 @@
+#serviceListContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#serviceListContainer>section {
+  margin: 2rem 0;
+  width: 45%;
+}
+
+#serviceListContainer>section>section ul {
+  list-style-type: none;
+}

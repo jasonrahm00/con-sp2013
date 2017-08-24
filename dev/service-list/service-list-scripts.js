@@ -3,56 +3,8 @@
 **************************************************************************/
 
 var serviceListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Services')/items?$top=200",
-    emailListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Emails')/items",
-    emails = {},
     teamPage = {},
     services = [];
-
-
-
-/**************************************************************************
-                          Get Team Contact
-**************************************************************************/
-
-//Run map on email list to add to services?
-var getTeamContact = function() {
-  return new Promise(function(resolve, reject) {
-    $.ajax({
-      url: emailListUrl,
-      type: "GET",
-      headers: {
-        "accept": "application/json;odata=verbose"
-      }
-    })
-    .success(function(data) {
-
-      var results = data.d.results;
-      
-      for(var i = 0; i < results.length; i++) {
-        var teamName = results[i].Team;
-        if(!emails[teamName]) {
-          emails[teamName] = [];
-        }
-        emails[teamName].push(results[i].Email.Description);
-      }
-      
-      for(var i = 0; i < results.length; i++) {
-        var teamName = results[i].Team;
-        if(!teamPage[teamName]) {
-          teamPage[teamName];
-        }
-        teamPage[teamName] = results[i].Department_Page ? results[i].Department_Page.Description : null;
-      }
-      
-      //After data is sorted and object created, the promise resolves so the next action can occur
-      resolve();
-      
-    })
-   .error(function() {
-      reject();
-    });
-  });
-};
 
 
 
@@ -123,8 +75,14 @@ function createList(x) {
   
   var list = '<ul class="list-column">';
   
+  function checkExit(z) {
+    if(z.indexOf('.pdf') > -1 || z.indexOf('mycon.ucdenver.edu') == -1) {
+      return 'target="_blank"';
+    }
+  }
+  
   function linkCheck(y) {
-    return y.link ? '<a href="' + y.link + '">' + y.service + '</a>' : y.service;
+    return y.link ? '<a href="' + y.link + '"' + checkExit(y.link) + '>' + y.service + '</a>' : y.service;
   }
   
   for(var i = 0; i < x.length; i++) {
@@ -139,20 +97,20 @@ function createList(x) {
 
 function createContact(email, page, team) {
   
-  var contactSection = '<section class="margin-top-small"><h3>Department Contact</h3><ul class="no-bullets">',
+  var contactSection = '<section><h3>Department Contact</h3><ul>',
       dataPresent = 0;
   
-  if(email !== undefined) {
+  if(email != undefined) {
     
     dataPresent++;
     
     for(var i = 0; i < email.length; i++) {
-      contactSection += '<li><a href="mailto:' + email[i] + '">' + email[i] + '</a></li>';
+      contactSection += '<li>Email: <a href="mailto:' + email[i] + '">' + email[i] + '</a></li>';
     }
 
   } 
   
-  if(page !== undefined || page !== null) {
+  if(page != undefined || page != null) {
     dataPresent++;
     contactSection += '<li><a href="' + page + '">Visit ' + team + ' Page</a></li>'
   }
@@ -166,7 +124,7 @@ function createContact(email, page, team) {
 }
 
 function buildServiceSections(x) {
-  var serviceSection = '<section class="width-45 margin-vertical-medium"><h2>' + x.team + '</h2>';
+  var serviceSection = '<section><h2>' + x.team + '</h2>';
       serviceSection += createList(x.list);
       serviceSection += createContact(x.email, x.page, x.team);
       serviceSection += '</section>';
@@ -190,7 +148,7 @@ $(document).ready(function() {
       }
     
       $('#loadingMessage').remove();
-      $('#serviceListContainer').addClass('flex-container').removeClass('hidden');
+      $('#serviceListContainer').removeClass('hidden');
     
     })
     .catch(function(reason) {
