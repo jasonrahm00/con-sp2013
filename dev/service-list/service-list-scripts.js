@@ -5,16 +5,17 @@
 var serviceListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Services')/items?$top=200",
     emailListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Emails')/items",
     emails = {},
+    teamPage = {},
     services = [];
 
 
 
 /**************************************************************************
-                              Get Emails
+                          Get Team Contact
 **************************************************************************/
 
 //Run map on email list to add to services?
-var getEmails = function() {
+var getTeamContact = function() {
   return new Promise(function(resolve, reject) {
     $.ajax({
       url: emailListUrl,
@@ -35,12 +36,19 @@ var getEmails = function() {
         emails[teamName].push(results[i].Email.Description);
       }
       
+      for(var i = 0; i < results.length; i++) {
+        var teamName = results[i].Team;
+        if(!teamPage[teamName]) {
+          teamPage[teamName];
+        }
+        teamPage[teamName] = results[i].Department_Page ? results[i].Department_Page.Description : null;
+      }
+      
       //After data is sorted and object created, the promise resolves so the next action can occur
       resolve();
       
     })
    .error(function() {
-      console.log('Error with getEmails()');
       reject();
     });
   });
@@ -86,7 +94,7 @@ var getServices = function() {
       }
       
       for(var teamName in teams) {
-        services.push({team: teamName, list: teams[teamName], email: emails[teamName]});
+        services.push({team: teamName, list: teams[teamName], email: emails[teamName], page: teamPage[teamName]});
       }
       
       //Object array is alpha sorted by team name
@@ -99,7 +107,6 @@ var getServices = function() {
       
     })
    .error(function() {
-      console.log('Error with getServices()');
       reject();
     });
   });
@@ -130,18 +137,29 @@ function createList(x) {
 
 }
 
-function createEmail(x) {
-  if(x !== undefined) {
-    var emailSection = '<section class="margin-top-small"><h3>Department Contact</h3><ul class="no-bullets">';
+function createContact(email, page, team) {
+  
+  var contactSection = '<section class="margin-top-small"><h3>Department Contact</h3><ul class="no-bullets">',
+      dataPresent = 0;
+  
+  if(email !== undefined) {
     
-    for(var i = 0; i < x.length; i++) {
-      emailSection += '<li><a href="mailto:' + x[i] + '">' + x[i] + '</a></li>';
+    dataPresent++;
+    
+    for(var i = 0; i < email.length; i++) {
+      contactSection += '<li><a href="mailto:' + email[i] + '">' + email[i] + '</a></li>';
     }
-    
-    emailSection += '</ul></section>';
-    
-    return emailSection;
-    
+
+  } 
+  
+  if(page !== undefined || page !== null) {
+    dataPresent++;
+    contactSection += '<li><a href="' + page + '">Visit ' + team + ' Page</a></li>'
+  }
+  
+  if(dataPresent > 0) {
+    contactSection += '</ul></section>';
+    return contactSection;
   } else {
     return '';
   }
@@ -150,7 +168,7 @@ function createEmail(x) {
 function buildServiceSections(x) {
   var serviceSection = '<section class="width-45 margin-vertical-medium"><h2>' + x.team + '</h2>';
       serviceSection += createList(x.list);
-      serviceSection += createEmail(x.email);
+      serviceSection += createContact(x.email, x.page, x.team);
       serviceSection += '</section>';
   $('#serviceListContainer').append(serviceSection);
 }
@@ -162,7 +180,7 @@ function buildServiceSections(x) {
 **************************************************************************/
 
 $(document).ready(function() {
-  getEmails()
+  getTeamContact()
     .then(getServices)
     .then(function() {
       console.log(services);
