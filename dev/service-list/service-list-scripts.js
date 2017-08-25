@@ -39,7 +39,6 @@ function getDirectory() {
           email: results[i].Email ? results[i].Email.split(",") : null
         }
       }
-      console.log(deptDirectory);
       resolve();
     })
     .error(function() {
@@ -48,9 +47,7 @@ function getDirectory() {
   })
 }
 
-function createContact(x) {
-  
-  var directoryEntry = x.directoryInfo
+function createContact(directoryEntry, departmentName) {
   
   var contactSection = '<section><h3>Department Contact</h3>';
       contactSection += '<ul>';
@@ -62,7 +59,7 @@ function createContact(x) {
     } 
   }
   
-  contactSection += directoryEntry.page ? ('<li><a href="' + directoryEntry.page + '">Visit ' + x.team + ' Page</a></li>') : '';
+  contactSection += directoryEntry.page ? ('<li><a href="' + directoryEntry.page + '">Visit ' + departmentName + ' Page</a></li>') : '';
   contactSection += '</ul></section>';
 
   return contactSection;
@@ -112,8 +109,7 @@ var getServices = function() {
         services.push(
           {
             team: teamName,
-            list: teams[teamName],
-            directoryInfo: deptDirectory[teamName] ? deptDirectory[teamName] : null
+            list: teams[teamName]
           }
         );
       }
@@ -167,7 +163,7 @@ function createList(x) {
 function buildServiceSections(x) {
   var serviceSection = '<section><h2>' + x.team + '</h2>';
       serviceSection += createList(x.list);
-      serviceSection += x.directoryInfo != null ? createContact(x) : '';
+      serviceSection += deptDirectory[x.team] ? createContact(deptDirectory[x.team], x.team) : '';
       serviceSection += '</section>';
   $('#serviceListContainer').append(serviceSection);
 }
@@ -182,7 +178,6 @@ $(document).ready(function() {
   getDirectory()
     .then(getServices)
     .then(function() {
-      console.log(services);
 
       for(var i = 0; i < services.length; i++) {
         buildServiceSections(services[i]);

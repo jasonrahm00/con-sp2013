@@ -1,16 +1,18 @@
 /**************************************************************************
-                            Get Team Contact
+                  Department Directory Functions
 **************************************************************************/
 
-/*
-var emailListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Directory')/items",
-    emails = {};
+var deptDirectoryUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Directory')/items",
+    deptDirectory = {};
 
-//Run map on email list to add to services?
-var getTeamContact = function() {
+//Get directory list data
+  //Adds data to the deptDirectory data on ajax success
+  //Returns promise when done
+function getDirectory() {
+  
   return new Promise(function(resolve, reject) {
     $.ajax({
-      url: emailListUrl,
+      url: deptDirectoryUrl,
       type: "GET",
       headers: {
         "accept": "application/json;odata=verbose"
@@ -22,30 +24,40 @@ var getTeamContact = function() {
 
       for(var i = 0; i < results.length; i++) {
         var teamName = results[i].Team;
-        if(!emails[teamName]) {
-          emails[teamName] = [];
+        deptDirectory[teamName] = {
+          page: results[i].Web_Page ? results[i].Web_Page.Url : null,
+          phone: results[i].Phone_Number ? results[i].Phone_Number : null,
+          email: results[i].Email ? results[i].Email.split(",") : null
         }
-        emails[teamName].push(results[i].Email.Description);
       }
-
-      for(var i = 0; i < results.length; i++) {
-        var teamName = results[i].Team;
-        if(!teamPage[teamName]) {
-          teamPage[teamName];
-        }
-        teamPage[teamName] = results[i].Department_Page ? results[i].Department_Page.Description : null;
-      }
-
-      //After data is sorted and object created, the promise resolves so the next action can occur
       resolve();
-
     })
-   .error(function() {
+    .error(function() {
       reject();
     });
-  });
-};
-*/
+  })
+}
+
+
+//Function used to create dept contact info section
+function createContact(directoryEntry, departmentName) {
+  
+  var contactSection = '<section><h3>Department Contact</h3>';
+      contactSection += '<ul>';
+      contactSection += directoryEntry.phone ? ('<li>Phone: ' + directoryEntry.phone + '</li>') : '';
+  
+  if(directoryEntry.email != null) {
+    for(var i = 0; i < directoryEntry.email.length; i++) {
+      contactSection += '<li>Email: <a href=mailto:' + directoryEntry.email[i] + '>' + directoryEntry.email[i] + '</a></li>';
+    } 
+  }
+  
+  contactSection += directoryEntry.page ? ('<li><a href="' + directoryEntry.page + '">Visit ' + departmentName + ' Page</a></li>') : '';
+  contactSection += '</ul></section>';
+
+  return contactSection;
+
+}
 
 
 
