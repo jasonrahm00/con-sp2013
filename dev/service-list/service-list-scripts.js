@@ -14,6 +14,9 @@ var serviceListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Depa
 var deptDirectoryUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Directory')/items",
     deptDirectory = {};
 
+//Get directory list data
+  //Adds data to the deptDirectory data on ajax success
+  //Returns promise when done
 function getDirectory() {
   
   return new Promise(function(resolve, reject) {
@@ -49,23 +52,18 @@ function createContact(x) {
   
   var directoryEntry = x.directoryInfo
   
-  function getDeptEmail(y) {
-    if(y) {
-      for(var i = 0; i < y.length; i++) {
-        return '<li>Email: <a href=mailto:' + y[i] + '>' + y[i] + '</a></li>';
-      } 
-    } else {
-      return '';
-    }
-    
-  }
-  
   var contactSection = '<section><h3>Department Contact</h3>';
       contactSection += '<ul>';
       contactSection += directoryEntry.phone ? ('<li>Phone: ' + directoryEntry.phone + '</li>') : '';
-      contactSection += getDeptEmail(directoryEntry.email);
-      contactSection += directoryEntry.page ? ('<li><a href="' + directoryEntry.page + '">Visit ' + x.team + ' Page</a></li>') : '';
-      contactSection += '</ul></section>';
+  
+  if(directoryEntry.email != null) {
+    for(var i = 0; i < directoryEntry.email.length; i++) {
+      contactSection += '<li>Email: <a href=mailto:' + directoryEntry.email[i] + '>' + directoryEntry.email[i] + '</a></li>';
+    } 
+  }
+  
+  contactSection += directoryEntry.page ? ('<li><a href="' + directoryEntry.page + '">Visit ' + x.team + ' Page</a></li>') : '';
+  contactSection += '</ul></section>';
 
   return contactSection;
 
