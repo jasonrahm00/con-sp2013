@@ -9,6 +9,10 @@
   width: 45%;
 }
 
+#serviceListContainer>section>section {
+  margin-top: 2rem;
+}
+
 #serviceListContainer>section>section ul {
   list-style-type: none;
 }
