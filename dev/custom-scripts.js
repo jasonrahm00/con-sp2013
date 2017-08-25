@@ -2,7 +2,8 @@
                             Get Team Contact
 **************************************************************************/
 
-var emailListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Emails')/items",
+/*
+var emailListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Department Directory')/items",
     emails = {};
 
 //Run map on email list to add to services?
@@ -44,6 +45,7 @@ var getTeamContact = function() {
     });
   });
 };
+*/
 
 
 

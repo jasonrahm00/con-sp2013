@@ -43,8 +43,8 @@ gulp.task('compile', function(callback) {
 
 gulp.task('service-scripts', function() {
   return gulp.src(['dev/service-list/service-list-scripts.js'])
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/live'))
+    //.pipe(uglify())
+    .pipe(gulp.dest('dist/test'))
 });
 
 gulp.task('service-css', function() {
