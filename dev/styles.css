@@ -105,11 +105,27 @@ ul.no-bullets {
   display: none;
 }
 
+#DeltaPlaceHolderMain a:link,
 #breadcrumbContainer a:link,
-#breadcrumbContainer a:visited,
+#breadcrumbContainer a:visited {
+  color: #03c;
+}
+
 #DeltaPlaceHolderMain a:link,
 #DeltaPlaceHolderMain a:visited {
-  color: #03c;
+  text-decoration: underline;
+}
+
+#DeltaPlaceHolderMain a:visited {
+  color: #797979;
+}
+
+#DeltaPlaceHolderMain a:hover,
+#breadcrumbContainer a:link,
+#breadcrumbContainer a:visited,
+#DeltaPlaceHolderMain thead a:link,
+#DeltaPlaceHolderMain thead a:visited {
+  text-decoration: none;
 }
 
 #DeltaPlaceHolderMain thead a:link,
