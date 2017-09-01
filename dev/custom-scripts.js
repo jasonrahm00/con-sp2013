@@ -323,7 +323,7 @@ $(document).ready(function() {
 
     //Place selected image preview and full versions in their respective containers  
     function placeImage() {
-      $('.preview-image').html('<figure><img alt ="Image preview" src="' + selectedThumb + '">' + caption + '</figure><span class="view-full-image"><img alt="Magnifying glass icon" src="/PublishingImages/magnify-glass-icon.png"></span>');    
+      $('.preview-image').html('<figure><img alt="" src="' + selectedThumb + '">' + caption + '</figure><span class="view-full-image"><img alt="View larger image" src="/PublishingImages/magnify-glass-icon.png"></span>');    
       $('.lightbox-content').html('<figure><img alt ="" src="' + selectedThumb + '">' + caption + '</figure>' + lightboxClose);
 
       //Add click event to the lightbox-close button whenever the image changes
