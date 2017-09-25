@@ -121,6 +121,7 @@ ul.no-bullets {
 }
 
 #DeltaPlaceHolderMain a:hover,
+#DeltaPlaceHolderMain a.button:link,
 #breadcrumbContainer a:link,
 #breadcrumbContainer a:visited,
 #DeltaPlaceHolderMain thead a:link,
