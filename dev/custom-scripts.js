@@ -85,7 +85,8 @@ $(document).ready(function() {
                       Custom Main Nav Functionality
   **************************************************************************/
 
-  //Add classes to top nav items so CSS can be used to indicate where the active page lives in the nav 
+  //Add classes to top nav items so CSS can be used to indicate where the active page lives in the nav
+  /*
   $('#DeltaTopNavigation li a').each(function (index, value) {
     
     if(window.location.href.indexOf(value.href) > -1 || (window.location.href.indexOf(value.href.split('/').slice(3,4)[0]) > -1 && value.href.split('/').slice(3,4)[0] !== 'Pages')) {
@@ -99,6 +100,7 @@ $(document).ready(function() {
       $(value).closest('li.static').addClass('active-nav-item');
     }
   });
+  */
 
   
   

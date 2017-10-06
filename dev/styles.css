@@ -125,7 +125,9 @@ ul.no-bullets {
 #breadcrumbContainer a:link,
 #breadcrumbContainer a:visited,
 #DeltaPlaceHolderMain thead a:link,
-#DeltaPlaceHolderMain thead a:visited {
+#DeltaPlaceHolderMain thead a:visited,
+#DeltaPlaceHolderMain .ms-webpart-titleText a:link,
+#DeltaPlaceHolderMain .ms-webpart-titleText a:visited {
   text-decoration: none;
 }
 
