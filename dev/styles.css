@@ -24,6 +24,10 @@ a.button:hover,
   text-decoration: none;
 }
 
+blockquote {
+  margin: 2rem 0 0 1rem; 
+}
+
 body, 
 .ms-core-overlay {
   background-color: #fff;
