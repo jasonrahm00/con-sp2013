@@ -43,7 +43,8 @@ h1>div,
 }
 
 h2, 
-h3, 
+h3,
+h4,
 .ms-h2, 
 .ms-headerFont {
   font-family: MuliRegular, Helvetica, Arial, sans-serif !important;
@@ -66,9 +67,11 @@ h3 {
   font-weight:bold;
 }
 
-h1 {
-  color: #000;
-  font-size: 2.77rem;
+h4{
+  font-size: 1.05rem;
+  font-weight: bold;
+  line-height: 100%;
+  margin-bottom: .75rem;
 }
 
 section {
