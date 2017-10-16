@@ -68,9 +68,9 @@ h3 {
 }
 
 h4{
-  font-size: 1.05rem;
+  font-size: 1.1em;
   font-weight: bold;
-  line-height: 100%;
+  line-height: 100% !important;
   margin-bottom: .75rem;
 }
 
@@ -140,6 +140,24 @@ ul.no-bullets {
 }
 
 
+
+/**********************************************************
+    
+                    Table Styles
+
+**********************************************************/
+
+table.custom-table {
+  width: 100%;
+}
+
+table.custom-table th {
+  font-weight: bold;
+}
+
+table.custom-table tbody tr:nth-child(2n) {
+  background-color: #ededed;
+}
 
 /**********************************************************
     
