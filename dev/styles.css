@@ -87,10 +87,6 @@ select:focus {
   border: 1px solid #bbb; 
 }
 
-ul.no-bullets {
-  list-style-type: none;
-}
-
 .center {
   text-align: center;
 }
@@ -99,7 +95,8 @@ ul.no-bullets {
   clear: both;
 }
 
-.clearfix:before, .clearfix:after {
+.clearfix:before, 
+.clearfix:after {
   content: "";
   display: table;
 }
@@ -162,6 +159,37 @@ table.custom-table th {
 table.custom-table tbody tr:nth-child(2n) {
   background-color: #ededed;
 }
+
+
+
+/**********************************************************
+    
+                    List Styles
+
+**********************************************************/
+
+ul.no-bullets {
+  list-style-type: none;
+}
+
+ul.column-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+ul.column-list.four>li {
+  width: 22.5%;
+}
+
+ul.column-list.three>li {
+  width: 30%;
+}
+
+ul.column-list.two>li {
+  width: 45%;
+}
+
 
 /**********************************************************
     
@@ -248,6 +276,10 @@ nav .ms-core-listMenu-root>li.static>ul>li {
 .ms-core-listMenu-horizontalBox a.ms-core-listMenu-item:hover,
 #sideNavBox a:hover {
   color: #000;
+}
+
+.ms-core-listMenu-item.ms-bold {
+  font-weight: normal !important;
 }
 
 #DeltaTopNavigation .dynamic-children .dynamic {
