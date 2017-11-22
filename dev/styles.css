@@ -190,6 +190,10 @@ ul.column-list.two>li {
   width: 45%;
 }
 
+.no-bullets ul {
+  list-style: none !important;
+}
+
 
 /**********************************************************
     
@@ -444,6 +448,29 @@ li.ms-navedit-editArea {
 }
 
 
+/************* Content Query WP Bullet Layout Overrides **************/
+
+div.cbq-layout-main ul.dfwp-column {
+  float: none;
+  padding-left: 0;
+}
+
+div.cbq-layout-main ul.dfwp-list {
+  list-style: initial;
+  -webkit-margin-start: 0px;
+  -webkit-marginn-end: 0px;
+  -webkit-padding-start: 40px;
+}
+
+div.cbq-layout-main li.dfwp-item div.item {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+div.cbq-layout-main li.dfwp-item div.bullet {
+  padding-left: 0;
+  background-image: none;
+}
 
 /**********************************************************
     
