@@ -63,13 +63,13 @@ gulp.task('compile-services', function(callback) {
 *********************************************/
 
 gulp.task('minify-dir-scripts', function() {
-  return gulp.src(['dev/staff-directory/*.js'])
+  return gulp.src(['dev/staff-directory/*/*.js', 'dev/staff-directory/*.js'])
     .pipe(uglify())
     .pipe(gulp.dest('dist/live'))
 });
 
 gulp.task('minify-dir-css', function() {
-  return gulp.src(['dev/staff-directory/*.css'])
+  return gulp.src(['dev/staff-directory/*/*.css'])
     .pipe(cssnano())
     .pipe(gulp.dest('dist/live'))
 });

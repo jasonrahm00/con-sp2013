@@ -1,0 +1,36 @@
+#directory header h2 {
+  margin-bottom: .25rem;
+}
+
+#directory header h3 {
+  color: #777;
+  font-style: italic;
+  font-weight: normal;
+}
+
+#directory>section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+
+#directory>section:last-child {
+  margin-bottom: 0;
+}
+
+#directory>section>div:first-child {
+  width: 20%;
+}
+
+#directory>section>div:last-child {
+  width: 75%;
+}
+
+.image-container {
+  text-align: center;
+}
+
+.image-container img {
+  height: auto;
+  max-width: 225px;
+}

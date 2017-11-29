@@ -4,7 +4,6 @@
 
 var allStaff = [],
     chosenTeam,
-    staffListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Staff Directory')/items",
     staffTeamListUrl = "https://mycon.ucdenver.edu/_vti_bin/listdata.svc/StaffDirectoryTeam",
     teams = [];
 
@@ -58,12 +57,12 @@ function getCredentials(x) {
   //URL filter query suffix = ?$filter=Team eq 'Marketing'
   
 //Ajax call to staff directory list
-var getDirectoryData = function() {
+var getDirectoryData = function(listUrl) {
 
   //Promise is created to sycnhronize actions when the page initially loads 
   return new Promise(function(resolve, reject) {
     $.ajax({
-      url: staffListUrl,
+      url: listUrl,
       type: "GET",
       headers: {
         "accept": "application/json;odata=verbose"
@@ -92,7 +91,8 @@ var getDirectoryData = function() {
             committees: value.Committee_Membership,
             committeeRole: value.Committee_Role,
             statement: value.Additional_Statement,
-            headshot: getHeadshotUrl(value)
+            headshot: getHeadshotUrl(value),
+            teamOrder: value.Team_Order
           }
         );
 

@@ -4,7 +4,8 @@ $(document).ready(function() {
                      Functions and Variables
   **************************************************************************/
   
-  var activeFilter = 'All';    
+  var activeFilter = 'All',
+      staffListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Staff Directory')/items";    
 
   /************************** Creating Staff Entries **************************/
   
@@ -25,9 +26,8 @@ $(document).ready(function() {
     $('#directory').append(staffCard);
 
   }
-
-  //Build list of entire staff by passing in allStaff array
-    //Called on initial load and if select option 'All' is chosen
+  
+  //Build list of entire staff by passing in a staff objects array
   function buildStaffList(staff) {
     cleanContainer();
     $.each(staff, function(index, value) {
@@ -88,7 +88,7 @@ $(document).ready(function() {
       //The full staff list and filter are visible on the page
       //The allStaff object array is available to dynamically filter the list in the page without additional api calls
 
-  getDirectoryData()
+  getDirectoryData(staffListUrl)
     .then(getTeamList)
     .then(function() {
       createFilter();
