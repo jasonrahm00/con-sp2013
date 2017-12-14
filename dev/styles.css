@@ -571,6 +571,11 @@ div.cbq-layout-main li.dfwp-item div.bullet {
   display: flex;
 }
 
+.flex-container.center {
+  align-items: center;
+  justify-content: center;
+}
+
 .flex-wrap-wrap {
   flex-wrap: wrap;
 }
