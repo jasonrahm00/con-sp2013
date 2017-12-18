@@ -95,6 +95,10 @@ select:focus {
   border: 1px solid #bbb; 
 }
 
+sup {
+  font-size: .7rem;
+}
+
 .center {
   text-align: center;
 }
