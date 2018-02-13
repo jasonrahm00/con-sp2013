@@ -88,7 +88,7 @@ var getDirectoryData = function(listUrl) {
             office: value.Office_Number,
             team: value.Team,
             duties: value.Job_Duties,
-            committees: value.Committee_Membership,
+            committees: value.Committe_Membership ? value.Committe_Membership.results : null,
             committeeRole: value.Committee_Role,
             statement: value.Additional_Statement,
             headshot: getHeadshotUrl(value),
