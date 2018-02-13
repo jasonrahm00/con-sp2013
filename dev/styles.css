@@ -40,7 +40,7 @@ h1,
 }
 
 h1,
-h1>div,
+h1 > div,
 .ms-core-pageTitle, 
 #DeltaPlaceHolderPageTitleInTitleArea {
   font-family: "Segoe UI Light","Segoe UI Light","Segoe UI","Segoe",Tahoma,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ h5 {
   font-weight: bold;
 }
 
-li>img {
+li > img {
   width: 100%;
 }
 
@@ -121,6 +121,10 @@ sup {
   display: none;
 }
 
+.no-bold {
+  font-weight: normal !important;
+}
+
 #DeltaPlaceHolderMain a:link,
 #breadcrumbContainer a:link,
 #breadcrumbContainer a:visited {
@@ -152,59 +156,6 @@ sup {
   color: #777;
 }
 
-
-
-/**********************************************************
-    
-                    Table Styles
-
-**********************************************************/
-
-table.custom-table {
-  width: 100%;
-}
-
-table.custom-table th {
-  font-weight: bold;
-}
-
-table.custom-table tbody tr:nth-child(2n) {
-  background-color: #ededed;
-}
-
-
-
-/**********************************************************
-    
-                    List Styles
-
-**********************************************************/
-
-ul.no-bullets {
-  list-style-type: none;
-}
-
-ul.column-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-ul.column-list.four>li {
-  width: 22.5%;
-}
-
-ul.column-list.three>li {
-  width: 30%;
-}
-
-ul.column-list.two>li {
-  width: 45%;
-}
-
-.no-bullets ul {
-  list-style: none !important;
-}
 
 
 /**********************************************************
@@ -267,7 +218,7 @@ nav {
   padding: 1rem;
 }
 
-nav .ms-core-listMenu-root>li.static>ul>li {
+nav .ms-core-listMenu-root > li.static > ul > li {
   font-size: .9rem;
 } 
 
@@ -311,7 +262,7 @@ nav .ms-core-listMenu-root>li.static>ul>li {
   background: #cfb87c;
 }
 
-#DeltaTopNavigation .active-nav-item>.ms-core-listMenu-item {
+#DeltaTopNavigation .active-nav-item > .ms-core-listMenu-item {
   border-bottom: 2px solid #cfb87c;
 }
 
@@ -324,11 +275,11 @@ nav .ms-core-listMenu-root>li.static>ul>li {
 }
 
 /* Style rules if using structured navigation
-#DeltaTopNavigation ul.root>li.static>a {
+#DeltaTopNavigation ul.root > li.static > a {
   display: none;
 }
 
-#DeltaTopNavigation ul.root>li.static>ul.static {
+#DeltaTopNavigation ul.root > li.static > ul.static {
   margin-left: 6rem;
 }
 */
@@ -337,7 +288,7 @@ nav .ms-core-listMenu-root>li.static>ul>li {
 
 /******************** Side Nav ********************/
 
-#DeltaPlaceHolderLeftNavBar>div>.ms-core-listMenu-verticalBox {
+#DeltaPlaceHolderLeftNavBar > div > .ms-core-listMenu-verticalBox {
   display: none;
 }
 
@@ -345,7 +296,7 @@ nav .ms-core-listMenu-root>li.static>ul>li {
   margin-top: .85rem;
 }
 
-#sideNavBox li>a.ms-core-listMenu-item:hover {
+#sideNavBox li > a.ms-core-listMenu-item:hover {
   background-color: #cfb87c;
 }
 
@@ -382,10 +333,10 @@ li.ms-navedit-editArea {
 }
 
 .ms-webpart-titleText.ms-webpart-titleText, 
-.ms-webpart-titleText>a,
-.ms-webpart-titleText>a span,
-.ms-webpart-titleText>a:active,
-.ms-webpart-titleText>a:hover {
+.ms-webpart-titleText > a,
+.ms-webpart-titleText > a span,
+.ms-webpart-titleText > a:active,
+.ms-webpart-titleText > a:hover {
   color: #565A5C;
   font-family: MuliRegular, Helvetica, Arial, sans-serif !important;
   text-decoration: none;
@@ -492,7 +443,7 @@ div.cbq-layout-main li.dfwp-item div.bullet {
 
 /**** Default Panel ****/
 
-.ms-acal-apanel>ul>li>ul>li:first-child {
+.ms-acal-apanel > ul > li > ul > li:first-child {
   display: none;
 }
 
@@ -549,6 +500,81 @@ div.cbq-layout-main li.dfwp-item div.bullet {
 .ms-acal-color6,
 .ms-acal-apanel-item.ms-acal-apanel-color6 {
   background-color: #9ea700;
+}
+
+
+/**********************************************************
+    
+                    Table Styles
+
+**********************************************************/
+
+table.custom-table {
+  width: 100%;
+}
+
+table.custom-table th {
+  background: #d6cca6;
+  font-weight: bold;
+}
+
+table.custom-table tr > * {
+  font-size: .85rem;
+  border-right: 1px solid #fff;
+  padding: 10px;
+}
+
+table.custom-table tr > *:last-child {
+  border-right: 0;
+}
+
+table.custom-table tbody tr:nth-child(2n) {
+  background-color: #ededed;
+}
+
+
+
+/**********************************************************
+    
+                    List Styles
+
+**********************************************************/
+
+ul.no-bullets {
+  list-style-type: none;
+}
+
+ul.column-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+ul.column-list.four > li {
+  width: 22.5%;
+}
+
+ul.column-list.three > li {
+  width: 30%;
+}
+
+ul.column-list.two > li {
+  width: 45%;
+}
+
+.disclaimer > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.disclaimer > ul li {
+  font-size: .75rem;
+  font-style: italic;  
+}
+
+.no-bullets ul {
+  list-style: none !important;
 }
 
 
