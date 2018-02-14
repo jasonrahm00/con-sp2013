@@ -1,15 +1,28 @@
 var $ = jQuery,
-    officeOrder = [
-      "Chair",
-      "Vice Chair",
-      "Parliamentarian",
-      "Secretary",
-      "Treasurer"
-    ],
     staffListUrl = "https://mycon.ucdenver.edu/_api/web/lists/GetByTitle('Staff Directory')/items",
     sgcMembers = [],
-    sgcOfficers = [],
-    sortedOfficers = [];
+    sgcOfficers = [
+      {
+        "office": "Chair",
+        "member": null
+      },
+      {
+        "office": "Vice Chair",
+        "member": null
+      },
+      {
+        "office": "Parliamentarian",
+        "member": null
+      },
+      {
+        "office": "Secretary",
+        "member": null
+      },
+      {
+        "office": "Treasurer",
+        "member": null
+      }      
+    ];
 
 $(document).ready(function() {
   
@@ -33,16 +46,6 @@ $(document).ready(function() {
 
   }
   
-  function sortOfficers() {
-    sgcOfficers.forEach(function(officer) {
-      for(var j = 0; j < officeOrder.length; i++) {
-        if(officer.committeeRole == officeOrder[j]) {
-          sortedOfficers[j] = officer;
-        }
-      }
-    });  
-  }
-  
   /**************************************************************************
                           Staff Directory Scripts
   **************************************************************************/
@@ -54,7 +57,11 @@ $(document).ready(function() {
       for(var i = 0; i < allStaff.length; i++) {
         if(allStaff[i].committees) {
           if(allStaff[i].committeeRole) {
-            sgcOfficers.push(allStaff[i]);
+            for(var j = 0; j < sgcOfficers.length; j++) {
+              if(sgcOfficers[j].office == allStaff[i].committeeRole) {
+                sgcOfficers[j].member = allStaff[i];
+              }
+            }
           } else {
             sgcMembers.push(allStaff[i]);
           }
@@ -62,11 +69,9 @@ $(document).ready(function() {
       }
     
       cleanContainer();
-    
-      sortOfficers();
-    
-      $.each(sortedOfficers, function(index, value) {
-        createStaffCard(value);
+
+      $.each(sgcOfficers, function(index, value) {
+        value.member ? createStaffCard(value.member) : '';
       });
       $.each(sgcMembers, function(index, value) {
         createStaffCard(value);
