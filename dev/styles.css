@@ -2,28 +2,6 @@
   outline: 0;
 }
 
-a.button,
-.print-accordion {
-  background: #000;
-  border: 0;
-  border-radius: 4px; 
-  color: #fff !important;
-  display: inline-block;
-  font-size: 1rem;
-  margin: 0;
-  padding: .5rem;
-  text-align: center;
-  text-decoration: none;
-}
-
-a.button:hover,
-.print-accordion:hover{
-  background: #000;
-  color: #cfb87c !important;
-  cursor: pointer;
-  text-decoration: none;
-}
-
 blockquote {
   margin: 2rem 0 0 1rem; 
 }
@@ -154,6 +132,31 @@ sup {
 #DeltaPlaceHolderMain thead a:link,
 #DeltaPlaceHolderMain thead a:visited {
   color: #777;
+}
+
+a.button,
+.custom-table.custom-add a.ms-addnew,
+.print-accordion {
+  background: #000;
+  border: 0;
+  border-radius: 4px; 
+  color: #fff !important;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0;
+  padding: .5rem;
+  text-align: center;
+  text-decoration: none !important;
+  text-transform: capitalize;
+}
+
+a.button:hover,
+.custom-table.custom-add a.ms-addnew:hover,
+.print-accordion:hover{
+  background: #000;
+  color: #cfb87c !important;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 
@@ -508,28 +511,43 @@ div.cbq-layout-main li.dfwp-item div.bullet {
                     Table Styles
 
 **********************************************************/
-
+                  
+.custom-table table,
 table.custom-table {
   width: 100%;
 }
 
+.custom-table table th,
 table.custom-table th {
   background: #d6cca6;
+  color: #4C4B44;
   font-weight: bold;
+  text-align: center;
 }
 
+.custom-table table tr > *,
 table.custom-table tr > * {
   font-size: .85rem;
   border-right: 1px solid #fff;
   padding: 10px;
 }
 
+.custom-table table tr > *:last-child,
 table.custom-table tr > *:last-child {
   border-right: 0;
 }
 
+.custom-table table tbody tr:nth-child(2n),
 table.custom-table tbody tr:nth-child(2n) {
   background-color: #ededed;
+}
+
+.custom-table.custom-add td.ms-addnew {
+  background: #fff;
+}
+
+.custom-table.custom-add span.s4-clust {
+  display: none !important;
 }
 
 
