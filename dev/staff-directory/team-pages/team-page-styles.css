@@ -32,5 +32,5 @@
 
 .image-container img {
   height: auto;
-  max-width: 225px;
+  max-width: 100%;
 }
