@@ -1,0 +1,8 @@
+<link rel="stylesheet" href="/Style%20Library/JavaScriptLibrary/announcements/announce-styles.css">
+
+<section>
+  <h2>Announcements</h2>
+  <div id="cardContainer"></div>
+</section>
+
+<script src="/Style%20Library/JavaScriptLibrary/announcements/announce-scripts.js"></script>
