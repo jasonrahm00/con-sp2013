@@ -1,8 +1,31 @@
-<link rel="stylesheet" href="/Style%20Library/JavaScriptLibrary/announcements/announce-styles.css">
+<link rel="stylesheet" href="https://mycon.ucdenver.edu/Style%20Library/JavaScriptLibrary/announcements/announce-styles.css">
+<script type="text/javascript" src="https://mycon.ucdenver.edu/Style%20Library/JavaScriptLibrary/angular-js/angularjs.min.js"></script>
 
-<section>
+<section data-ng-app="announcements">
   <h2>Announcements</h2>
-  <div id="cardContainer"></div>
+  <div class="flex-container" data-ng-controller="mainController">
+    <div id="cardContainer">
+      <div class="card" data-ng-repeat="x in allAnnounce">
+        <div class="card-header">
+          <img src='https://mycon.ucdenver.edu/PublishingImages/icons/megaphone-blue.png' alt=''>
+          <span class="card-title">{{ x.title }}</span>
+          <span class="card-cat">{{ x.category }}</span>
+        </div>
+        <div class="card-content">
+          <span data-ng-bind-html="x.content | renderHTMLCorrectly"></span>
+          <span class="card-date">{{ x.created }}</span>
+        </div>
+      </div>
+    </div>
+    <div id="cardFilters">
+      <h3>Filter Announcements</h3>
+      <label for='All'><input name='category' id='All' value='All' type='radio' checked data-ng-model="chosenFilter">All Announcements</label></li>
+      <label data-ng-repeat="filter in catFilters.all" for="{{ filter }}" data-ng-model="chosenFilter">
+        <input type="radio" name="category" id="{{ filter }}" value="{{ filter }}">
+        {{ filter }}
+      </label>
+    </div>
+  </div>
 </section>
 
-<script src="/Style%20Library/JavaScriptLibrary/announcements/announce-scripts.js"></script>
+<script type="text/javascript" src="https://mycon.ucdenver.edu/Style%20Library/JavaScriptLibrary/announcements/announce-scripts.js"></script>

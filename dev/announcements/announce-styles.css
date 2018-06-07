@@ -15,6 +15,22 @@
   border-bottom: none;
 }
 
+#cardContainer .card-content {
+  margin-left: 45px;
+  margin-top: 10px;
+}
+
+#cardContainer .card-date {
+  float: right;
+}
+
+#cardContainer .card-content:after,
+#cardContainer .card-content:before {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
 #cardContainer .card-header > img {
   float: left;
   margin-right: 10px;
@@ -34,18 +50,16 @@
   font-style: italic;
 }
 
-#cardContainer .card-content {
-  margin-left: 45px;
-  margin-top: 10px;
+#cardFilters {
+  margin-left: 3rem;
 }
 
-#cardContainer .card-date {
-  float: right;
+#cardFilters > label {
+  cursor: pointer;
+  display: block;
+  padding: 5px 0;
 }
 
-#cardContainer .card-content:after,
-#cardContainer .card-content:before {
-  content: " ";
-  display: table;
-  clear: both;
+#cardFilters > label > input {
+  margin-top: 0;
 }
