@@ -4,26 +4,37 @@
 <section data-ng-app="announcements">
   <h2>Announcements</h2>
   <div class="flex-container" data-ng-controller="mainController">
+
     <div id="cardContainer">
-      <div class="card" data-ng-repeat="x in allAnnounce">
+
+      <div class="card" data-ng-repeat="x in filteredAnnounce | orderBy:'-modified'">
         <div class="card-header">
-          <img src='https://mycon.ucdenver.edu/PublishingImages/icons/megaphone-blue.png' alt=''>
+          <img data-ng-src="/PublishingImages/icons/{{ x.category.icon}}-{{ x.category.color }}.png" alt="icon">
           <span class="card-title">{{ x.title }}</span>
-          <span class="card-cat">{{ x.category }}</span>
+          <span class="card-cat">{{ x.category.name }}</span>
         </div>
         <div class="card-content">
           <span data-ng-bind-html="x.content | renderHTMLCorrectly"></span>
-          <span class="card-date">{{ x.created }}</span>
+          <span class="card-date">{{ x.modified }}</span>
         </div>
       </div>
+
     </div>
+
     <div id="cardFilters">
       <h3>Filter Announcements</h3>
-      <label for='All'><input name='category' id='All' value='All' type='radio' checked data-ng-model="chosenFilter">All Announcements</label></li>
-      <label data-ng-repeat="filter in catFilters.all" for="{{ filter }}" data-ng-model="chosenFilter">
-        <input type="radio" name="category" id="{{ filter }}" value="{{ filter }}">
-        {{ filter }}
-      </label>
+
+      <ul>
+        <li class="{{ x.icon }}"
+            data-ng-repeat="x in categories | orderBy:'name'"
+            data-ng-class="x.index == chosenFilter ? 'selected' : ''">
+          <input type="radio" name="category" id="{{ x.name }}"
+            data-ng-value="{{ x.index }}"
+            data-ng-model="$parent.chosenFilter">
+          <label for="{{ x.name }}">{{ x.name }}</label>
+        </li>
+      </ul>
+
     </div>
   </div>
 </section>

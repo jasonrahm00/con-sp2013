@@ -1,3 +1,7 @@
+/***************************************************
+  Card Styles
+***************************************************/
+
 #cardContainer {
   border: 1px solid #ddd;
   height: 600px;
@@ -31,10 +35,14 @@
   clear: both;
 }
 
+#cardContainer .card-header > img,
+#cardFilters label img {
+  width: 35px;
+}
+
 #cardContainer .card-header > img {
   float: left;
   margin-right: 10px;
-  width: 35px;
 }
 
 #cardContainer .card-header span {
@@ -50,16 +58,92 @@
   font-style: italic;
 }
 
+
+
+/***************************************************
+  Filter Styles
+***************************************************/
+
 #cardFilters {
   margin-left: 3rem;
 }
 
-#cardFilters > label {
+#cardFilters label {
+  border-radius: 2px;
   cursor: pointer;
   display: block;
-  padding: 5px 0;
+  line-height: 35px;
+  margin-bottom: 15px;
+  padding-left: 45px;
+  width: 200px;
 }
 
-#cardFilters > label > input {
+#cardFilters li.selected label,
+#cardFilters li:hover label {
+  background: #ddd;
+}
+
+#cardFilters li:last-child label {
+  margin-bottom: 0;
+}
+
+#cardFilters ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#cardFilters li {
+  position: relative;
+  margin: 10px 0;
+}
+
+#cardFilters input {
+  display: none;
   margin-top: 0;
+}
+
+#cardFilters li label:before {
+  background: url('/PublishingImages/icons/megaphone-blue.png') left center no-repeat;
+  content: "";
+  width: 35px;
+  height: 35px;
+  background-size: 35px 35px;
+  position: absolute;
+  left: 0;
+}
+
+#cardFilters li.megaphone label:before {
+  background-image: url('/PublishingImages/icons/megaphone-blue.png');
+}
+
+#cardFilters li.question label:before {
+  background-image: url('/PublishingImages/icons/question-blue.png');
+}
+
+#cardFilters li.presentation label:before {
+  background-image: url('/PublishingImages/icons/presentation-blue.png');
+}
+
+#cardFilters li.person label:before {
+  background-image: url('/PublishingImages/icons/person-blue.png');
+}
+
+#cardFilters li.money label:before {
+  background-image: url('/PublishingImages/icons/money-blue.png');
+}
+
+#cardFilters li.checklist label:before {
+  background-image: url('/PublishingImages/icons/checklist-blue.png');
+}
+
+#cardFilters li.hierarchy label:before {
+  background-image: url('/PublishingImages/icons/hierarchy-blue.png');
+}
+
+#cardFilters li.handshake label:before {
+  background-image: url('/PublishingImages/icons/handshake-blue.png');
+}
+
+#cardFilters li.certificate label:before {
+  background-image: url('/PublishingImages/icons/certificate-blue.png');
 }
