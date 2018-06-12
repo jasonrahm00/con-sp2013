@@ -1,8 +1,7 @@
-const currentPage = window.location.href,
-      hrUrlString = "human-resources",
-      now = Date.now();
-
-var   categories = [
+var currentPage = window.location.href,
+    hrUrlString = "human-resources",
+    now = Date.now(),
+    categories = [
         {
           "name": "All Announcements",
           "icon": "megaphone",
@@ -74,7 +73,7 @@ var   categories = [
           "count": 0
         }
       ],
-      hrCats = [
+    hrCats = [
         categories[0],
         categories[1],
         categories[5],
@@ -94,12 +93,15 @@ angular.module("announcements", [])
 
   "use strict";
 
+  // Strips non-numeric characters from string and returns integer
   function getNum(str) {
     return parseInt(str.replace(/\D/g,""));
   }
 
+  // Expects cateogry name string from dataItem object
+    // Returns category object with matching name
   function getCategory(x) {
-    let category = {};
+    var category = {};
     categories.forEach(function(element) {
       if (element.name === x) {
         category = element;
@@ -108,8 +110,11 @@ angular.module("announcements", [])
     return category;
   }
 
+  // Expects category object from dataItem
+    // Iterates over hrCats array and sets match to 'true' if category names match
+    // Used to limit display of results on hr pages
   function checkHrCat(x) {
-    let match = false;
+    var match = false;
     hrCats.forEach(function(value, index) {
       if(x.category.name == value.name) {
         match = true;
@@ -118,30 +123,32 @@ angular.module("announcements", [])
     return match;
   }
 
-  function countResults(data, cats) {
-    data.forEach(function(value, index) {
-      if(value.category === x.name) {
-        x.count++;
-      }
-    });
-  }
-
+  // getData method to be called from controller
+    // Returns promise with announcement data object array upon success
   this.getData = function() {
 
-    let deferred = $q.defer();
+    var deferred = $q.defer();
 
+    // Get function that retrieves data from Internal Annoucements list
     return $http.get("https://mycon.ucdenver.edu/_vti_bin/listdata.svc/InternalAnnouncements")
       .then(function(response) {
-        let data = [];
-      
+        var data = [];
+
+        // If get request succeeds, iterate over results
         response.data.d.results.forEach(function(value, index) {
+
+          // Only select results that are not "Dean Message"
           if (value.CategoryValue !== "Dean Message") {
 
-            let publishDate = value.PublishDate ? getNum(value.PublishDate) : null;
+            // Get value of publish date, if set, should be milliseconds
+              // Send to getNum function to strip out non-numeric characters
+            var publishDate = value.PublishDate ? getNum(value.PublishDate) : null;
 
+            // If check to only grab results that are 'published', ready for display
             if (publishDate === null || publishDate < now) {
 
-              let dataItem = {
+              // Create data object for each result
+              var dataItem = {
                 "title": value.Announcement,
                 "category": getCategory(value.CategoryValue),
                 "content": value.Description,
@@ -150,6 +157,10 @@ angular.module("announcements", [])
                 "publishDate": publishDate
               };
 
+              // Check to see if widget is loaded on HR page
+                // If not on HR Page, push all relevant, published dataItems to data array
+                // If on HR page, pass each dataItem into checkHrCat function
+                  // Only dataItems that have matching HR Cat values are pushed into data array
               if (currentPage.indexOf(hrUrlString) < 0) {
                 data.push(dataItem);
               } else if(currentPage.indexOf(hrUrlString) > -1 && checkHrCat(dataItem)) {
@@ -159,6 +170,9 @@ angular.module("announcements", [])
           }
         });
 
+        // Call map method on categories array
+          // Iterates over each data object and increases category count property when matching category is found in data
+          // Count property used to disable html filter inputs with no results, and display total results for each category
         categories.map(function(obj) {
           data.forEach(function(value, index) {
             if(obj.name === value.category.name) {
@@ -167,6 +181,7 @@ angular.module("announcements", [])
           })
         });
 
+        // Resolves $q.defer() and returns data promise
         deferred.resolve(data);
         return deferred.promise;
     }, function(error) {
@@ -182,12 +197,10 @@ angular.module("announcements", [])
   $scope.allAnnounce = [];
   $scope.filteredAnnounce = [];
 
-  $scope.count = function (prop, value) {
-    return function (el) {
-      return el[prop] == value;
-    };
-  };
-
+  // Loads data from dataService, response data expected to be json object array
+    // Response data assigned to two scoped variables
+      // $scope.allAnnounce used to reset filters
+      // $scope.chosenFilter set to index of "All Announcements" filter object so that input is selected and highlighted when page loads
   dataService.getData().then(function(response) {
     $scope.allAnnounce = response;
     $scope.filteredAnnounce = response;
@@ -196,12 +209,17 @@ angular.module("announcements", [])
     console.log(error);
   });
 
+  // Watcher set on chosenFilter. Triggered when new filter is clicked, the value changes
   $scope.$watch("chosenFilter", function(newVal, oldVal) {
     if (newVal != oldVal) {
       if (newVal === 0) {
+        // Resets filters if "All Announcements" is selected
         $scope.filteredAnnounce = $scope.allAnnounce;
       } else {
-        let filtered = [];
+        // Filtered array set up to capture announcements whose index property matches
+          // Matching announcement objects pushed into filtered array
+          // filteredAnnounce set to filtered array so DOM will re-paint and show results of selection
+        var filtered = [];
         $scope.allAnnounce.forEach(function(elem) {
           if (elem.category.index === newVal) {
             filtered.push(elem);
