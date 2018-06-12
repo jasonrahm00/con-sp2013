@@ -143,17 +143,17 @@ angular.module("announcements", [])
             // Get value of publish date, if set, should be milliseconds
               // Send to getNum function to strip out non-numeric characters
             var publishDate = value.PublishDate ? getNum(value.PublishDate) : null;
+            var expireDate = value.Expires ? getNum(value.Expires) : null;
 
-            // If check to only grab results that are 'published', ready for display
-            if (publishDate === null || publishDate < now) {
+            // If check to only grab results that are 'published', ready for display and not expired
+            if ((publishDate === null || publishDate < now) && (expireDate === null || expireDate > now)) {
 
               // Create data object for each result
               var dataItem = {
                 "title": value.Announcement,
                 "category": getCategory(value.CategoryValue),
                 "content": value.Description,
-                "created": getNum(value.Created),
-                "modified": getNum(value.Modified),
+                "expires": expireDate,
                 "publishDate": publishDate
               };
 

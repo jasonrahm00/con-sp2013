@@ -2,12 +2,22 @@
 <script type="text/javascript" src="https://mycon.ucdenver.edu/Style%20Library/JavaScriptLibrary/angular-js/angularjs.min.js"></script>
 
 <section data-ng-app="announcements">
-  <h2>Announcements</h2>
+
+  <header>
+    <h2>Announcements</h2>
+    <p>
+      <a href="https://mycon.ucdenver.edu/_layouts/15/listfeed.aspx?List=a049f07b-c0e1-4ef1-8328-adc893d74bca&View=1f8b9fcd-56af-4b19-9ab0-c7e434801855">
+        All Announcements RSS Feed
+        <img src="/_layouts/15/images/rss.gif?rev=23" alt="RSS icon">
+      </a>
+    </p>
+  </header>
+
   <div class="flex-container" data-ng-controller="mainController">
 
     <div id="cardContainer" data-ng-cloak>
 
-      <div class="card" data-ng-repeat="x in filteredAnnounce | orderBy:'-modified'">
+      <div class="card" data-ng-repeat="x in filteredAnnounce | orderBy:'-publishDate'">
         <div class="card-header">
           <img data-ng-src="/PublishingImages/icons/{{ x.category.icon}}-{{ x.category.color }}.png" alt="icon">
           <span class="card-title">{{ x.title }}</span>
@@ -15,7 +25,7 @@
         </div>
         <div class="card-content">
           <span data-ng-bind-html="x.content | renderHTMLCorrectly"></span>
-          <span class="card-date">{{ x.publishDate ? (x.publishDate < x.modified ? x.modified : x.publishDate) : x.modified | date: 'MMM dd, yyyy'}}</span>
+          <span class="card-date">{{ x.publishDate | date: 'MMM dd, yyyy'}}</span>
         </div>
       </div>
 
