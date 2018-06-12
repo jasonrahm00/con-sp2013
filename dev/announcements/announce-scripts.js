@@ -193,9 +193,11 @@ angular.module("announcements", [])
 })
 .controller("mainController", function($scope, dataService){
 
-  $scope.categories = currentPage.indexOf(hrUrlString) > -1 ? hrCats : categories;
+  $scope.hrPage = currentPage.indexOf(hrUrlString) > -1 ? true : false;
+  $scope.categories = $scope.hrPage ? hrCats : categories;
   $scope.allAnnounce = [];
   $scope.filteredAnnounce = [];
+  $scope.currPage = currentPage;
 
   // Loads data from dataService, response data expected to be json object array
     // Response data assigned to two scoped variables

@@ -5,7 +5,7 @@
   <h2>Announcements</h2>
   <div class="flex-container" data-ng-controller="mainController">
 
-    <div id="cardContainer">
+    <div id="cardContainer" data-ng-cloak>
 
       <div class="card" data-ng-repeat="x in filteredAnnounce | orderBy:'-modified'">
         <div class="card-header">
@@ -21,7 +21,7 @@
 
     </div>
 
-    <div id="cardFilters">
+    <div id="cardFilters" data-ng-cloak>
       <h3>Filter Announcements ({{ filteredAnnounce.length }})</h3>
 
       <ul>
