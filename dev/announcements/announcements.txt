@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://mycon.ucdenver.edu/Style%20Library/JavaScriptLibrary/announcements/announce-styles.css">
+<link type="text/css" rel="stylesheet" href="https://mycon.ucdenver.edu/Style%20Library/JavaScriptLibrary/announcements/announce-styles.css">
 <script type="text/javascript" src="https://mycon.ucdenver.edu/Style%20Library/JavaScriptLibrary/angular-js/angularjs.min.js"></script>
 
 <section data-ng-app="announcements">
@@ -15,14 +15,14 @@
         </div>
         <div class="card-content">
           <span data-ng-bind-html="x.content | renderHTMLCorrectly"></span>
-          <span class="card-date">{{ x.modified }}</span>
+          <span class="card-date">{{ x.publishDate ? (x.publishDate < x.modified ? x.modified : x.publishDate) : x.modified | date: 'MMM dd, yyyy'}}</span>
         </div>
       </div>
 
     </div>
 
     <div id="cardFilters">
-      <h3>Filter Announcements</h3>
+      <h3>Filter Announcements ({{ filteredAnnounce.length }})</h3>
 
       <ul>
         <li class="{{ x.icon }}"

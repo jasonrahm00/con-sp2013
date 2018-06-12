@@ -1,25 +1,6 @@
 const currentPage = window.location.href,
-      hrUrlString = "/human-resources/",
-      facAffairsUrlString = "/faculty-affairs/",
-      hrCats = [
-        "General Announcements",
-        "Compensation & Payroll",
-        "Performance Evaluations",
-        "Personnel Changes",
-        "Recruitment",
-        "Training & Development"
-      ],
-      facCats = [
-        "General Announcements",
-        "Faculty Support",
-        "Grand Rounds",
-        "Promotion & Tenure",
-        "Compensation & Payroll",
-        "Performance Evaluations",
-        "Personnel Changes",
-        "Recruitment",
-        "Training & Development"
-      ],
+      hrUrlString = "human-resources",
+      now = Date.now(),
       categories = [
         {
           "name": "All Announcements",
@@ -29,7 +10,7 @@ const currentPage = window.location.href,
         },
         {
           "name": "General Announcements",
-          "icon": "megaphone",
+          "icon": "newspaper",
           "index": 1,
           "color": "blue"
         },
@@ -81,19 +62,33 @@ const currentPage = window.location.href,
           "index": 9,
           "color": "blue"
         }
+      ],
+      hrCats = [
+        categories[0],
+        categories[1],
+        categories[5],
+        categories[6],
+        categories[7],
+        categories[8],
+        categories[9]
       ];
 
 angular.module("announcements", [])
-.service('dataService', function($http, $q){
+.filter("renderHTMLCorrectly", function($sce) {
+	return function(stringToParse) {
+      return $sce.trustAsHtml(stringToParse);
+	}
+})
+.service("dataService", function($http, $q){
 
-  'use strict';
+  "use strict";
 
   function getNum(str) {
-    return str.replace(/\D/g,"");
+    return parseInt(str.replace(/\D/g,""));
   }
 
   function getCategory(x) {
-    var category = {};
+    let category = {};
     categories.forEach(function(element) {
       if (element.name === x) {
         category = element;
@@ -102,26 +97,45 @@ angular.module("announcements", [])
     return category;
   }
 
+  function checkHrCat(x) {
+    let match = false;
+    hrCats.forEach(function(value, index) {
+      if(x.category.name == value.name) {
+        match = true;
+      }
+    });
+    return match;
+  }
+
   this.getData = function() {
 
-    var deferred = $q.defer();
+    let deferred = $q.defer();
 
-    //Filter results at data call when on hr or fac affairs page. Pass list view or filter param into url query?
-    return $http.get('https://mycon.ucdenver.edu/_vti_bin/listdata.svc/InternalAnnouncements')
+    return $http.get("https://mycon.ucdenver.edu/_vti_bin/listdata.svc/InternalAnnouncements")
       .then(function(response) {
-        var data = [];
+        let data = [];
         response.data.d.results.forEach(function(value, index) {
-          if(value.CategoryValue !== "Dean Message") {
-            data.push(
-              {
-                "index": index,
+          if (value.CategoryValue !== "Dean Message") {
+
+            let publishDate = value.PublishDate ? getNum(value.PublishDate) : null;
+
+            if (publishDate === null || publishDate < now) {
+
+              let dataItem = {
                 "title": value.Announcement,
                 "category": getCategory(value.CategoryValue),
                 "content": value.Description,
-                "created": new Date(parseInt(getNum(value.Created))).toDateString(),
-                "modified": new Date(parseInt(getNum(value.Modified))).toDateString()
+                "created": getNum(value.Created),
+                "modified": getNum(value.Modified),
+                "publishDate": publishDate
+              };
+
+              if (currentPage.indexOf(hrUrlString) < 0) {
+                data.push(dataItem);
+              } else if(currentPage.indexOf(hrUrlString) > -1 && checkHrCat(dataItem)) {
+                data.push(dataItem);
               }
-            );
+            }
           }
         });
         deferred.resolve(data);
@@ -133,14 +147,9 @@ angular.module("announcements", [])
   };
 
 })
-.filter("renderHTMLCorrectly", function($sce) {
-	return function(stringToParse) {
-      return $sce.trustAsHtml(stringToParse);
-	}
-})
 .controller("mainController", function($scope, dataService){
 
-  $scope.categories = categories;
+  $scope.categories = currentPage.indexOf(hrUrlString) > -1 ? hrCats : categories;
   $scope.allAnnounce = [];
   $scope.filteredAnnounce = [];
 
@@ -152,7 +161,7 @@ angular.module("announcements", [])
     console.log(error);
   });
 
-  $scope.$watch('chosenFilter', function(newVal, oldVal) {
+  $scope.$watch("chosenFilter", function(newVal, oldVal) {
     if (newVal != oldVal) {
       if (newVal === 0) {
         $scope.filteredAnnounce = $scope.allAnnounce;

@@ -147,3 +147,7 @@
 #cardFilters li.certificate label:before {
   background-image: url('/PublishingImages/icons/certificate-blue.png');
 }
+
+#cardFilters li.newspaper label:before {
+  background-image: url('/PublishingImages/icons/newspaper-blue.png');
+}
