@@ -1,66 +1,77 @@
 const currentPage = window.location.href,
       hrUrlString = "human-resources",
-      now = Date.now(),
-      categories = [
+      now = Date.now();
+
+var   categories = [
         {
           "name": "All Announcements",
           "icon": "megaphone",
           "index": 0,
-          "color": "blue"
+          "color": "blue",
+          "count": null
         },
         {
           "name": "General Announcements",
           "icon": "newspaper",
           "index": 1,
-          "color": "blue"
+          "color": "blue",
+          "count": 0
         },
         {
           "name": "Faculty Support",
           "icon": "question",
           "index": 2,
-          "color": "blue"
+          "color": "blue",
+          "count": 0
         },
         {
           "name": "Grand Rounds",
           "icon": "presentation",
           "index": 3,
-          "color": "blue"
+          "color": "blue",
+          "count": 0
         },
         {
           "name": "Promotion & Tenure",
           "icon": "person",
           "index": 4,
-          "color": "blue"
+          "color": "blue",
+          "count": 0
         },
         {
           "name": "Compensation & Payroll",
           "icon": "money",
           "index": 5,
-          "color": "blue"
+          "color": "blue",
+          "count": 0
         },
         {
           "name": "Performance Evaluations",
           "icon": "checklist",
           "index": 6,
-          "color": "blue"
+          "color": "blue",
+          "count": 0
         },
         {
           "name": "Personnel Changes",
           "icon": "hierarchy",
           "index": 7,
-          "color": "blue"
+          "color": "blue",
+          "count": 0
         },
         {
           "name": "Recruitment",
           "icon": "handshake",
           "index": 8,
-          "color": "blue"
+          "color": "blue",
+          "count": 0
         },
         {
           "name": "Training & Development",
           "icon": "certificate",
           "index": 9,
-          "color": "blue"
+          "color": "blue",
+          "count": 0
         }
       ],
       hrCats = [
@@ -75,9 +86,9 @@ const currentPage = window.location.href,
 
 angular.module("announcements", [])
 .filter("renderHTMLCorrectly", function($sce) {
-	return function(stringToParse) {
-      return $sce.trustAsHtml(stringToParse);
-	}
+  return function(stringToParse) {
+    return $sce.trustAsHtml(stringToParse);
+  }
 })
 .service("dataService", function($http, $q){
 
@@ -107,6 +118,14 @@ angular.module("announcements", [])
     return match;
   }
 
+  function countResults(data, cats) {
+    data.forEach(function(value, index) {
+      if(value.category === x.name) {
+        x.count++;
+      }
+    });
+  }
+
   this.getData = function() {
 
     let deferred = $q.defer();
@@ -114,6 +133,7 @@ angular.module("announcements", [])
     return $http.get("https://mycon.ucdenver.edu/_vti_bin/listdata.svc/InternalAnnouncements")
       .then(function(response) {
         let data = [];
+      
         response.data.d.results.forEach(function(value, index) {
           if (value.CategoryValue !== "Dean Message") {
 
@@ -138,6 +158,15 @@ angular.module("announcements", [])
             }
           }
         });
+
+        categories.map(function(obj) {
+          data.forEach(function(value, index) {
+            if(obj.name === value.category.name) {
+              obj.count++;
+            }
+          })
+        });
+
         deferred.resolve(data);
         return deferred.promise;
     }, function(error) {
@@ -152,6 +181,12 @@ angular.module("announcements", [])
   $scope.categories = currentPage.indexOf(hrUrlString) > -1 ? hrCats : categories;
   $scope.allAnnounce = [];
   $scope.filteredAnnounce = [];
+
+  $scope.count = function (prop, value) {
+    return function (el) {
+      return el[prop] == value;
+    };
+  };
 
   dataService.getData().then(function(response) {
     $scope.allAnnounce = response;

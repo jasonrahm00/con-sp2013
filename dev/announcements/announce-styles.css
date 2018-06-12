@@ -112,6 +112,21 @@
   left: 0;
 }
 
+#cardFilters li.disabled {
+  opacity: 0.5;
+}
+
+#cardFilters li.disabled:hover label {
+  background-color: #fff;
+  cursor: default;
+}
+
+
+
+/***************************************************
+  Icons
+***************************************************/
+
 #cardFilters li.megaphone label:before {
   background-image: url('/PublishingImages/icons/megaphone-blue.png');
 }

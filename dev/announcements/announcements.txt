@@ -27,11 +27,16 @@
       <ul>
         <li class="{{ x.icon }}"
             data-ng-repeat="x in categories | orderBy:'name'"
-            data-ng-class="x.index == chosenFilter ? 'selected' : ''">
+            data-ng-class="{selected: x.index === chosenFilter, disabled: x.count === 0 && x.name !== 'All Announcements'}">
           <input type="radio" name="category" id="{{ x.name }}"
             data-ng-value="{{ x.index }}"
-            data-ng-model="$parent.chosenFilter">
-          <label for="{{ x.name }}">{{ x.name }}</label>
+            data-ng-model="$parent.chosenFilter"
+            data-ng-disabled="x.count === 0 && x.name !== 'All Announcements'">
+          <label for="{{ x.name }}">
+            {{ x.name }}
+            <span data-ng-if="x.name !== 'All Announcements'">({{ x.count }})</span>
+            <span data-ng-if="x.name === 'All Announcements'">({{ allAnnounce.length }})</span>
+          </label>
         </li>
       </ul>
 
