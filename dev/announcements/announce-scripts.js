@@ -198,6 +198,8 @@ angular.module("announcements", [])
   $scope.allAnnounce = [];
   $scope.filteredAnnounce = [];
   $scope.currPage = currentPage;
+  $scope.dataLoaded = false;
+  $scope.loadError = false;
 
   // Loads data from dataService, response data expected to be json object array
     // Response data assigned to two scoped variables
@@ -207,7 +209,9 @@ angular.module("announcements", [])
     $scope.allAnnounce = response;
     $scope.filteredAnnounce = response;
     $scope.chosenFilter = 0;
+    $scope.dataLoaded = true;
   }, function(error) {
+    $scope.loadError = true;
     console.log(error);
   });
 

@@ -3,21 +3,30 @@
 
 <section data-ng-app="announcements">
 
-  <header>
-    <h2>Announcements</h2>
-    <p>
-      <a href="https://mycon.ucdenver.edu/_layouts/15/listfeed.aspx?List=a049f07b-c0e1-4ef1-8328-adc893d74bca&View=1f8b9fcd-56af-4b19-9ab0-c7e434801855">
-        All Announcements RSS Feed
-        <img src="/_layouts/15/images/rss.gif?rev=23" alt="RSS icon">
-      </a>
-    </p>
-  </header>
+  <h2>Announcements</h2>
 
   <div class="flex-container" data-ng-controller="mainController">
 
-    <div id="cardContainer" data-ng-cloak>
+    <div id="cardContainer">
 
-      <div class="card" data-ng-repeat="x in filteredAnnounce | orderBy:'-publishDate'">
+      <div class="load-message" data-ng-if="!dataLoaded && !loadError">
+        <div>
+          <p>Loading Announcements</p>
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+      <div class="load-message" data-ng-if="loadError">
+        <div>
+          <p>Unable to Load Announcements</p>
+        </div>
+      </div>
+
+      <div class="card"
+        data-ng-repeat="x in filteredAnnounce | orderBy:'-publishDate'"
+        data-ng-cloak
+        data-ng-if="dataLoaded">
+
         <div class="card-header">
           <img data-ng-src="/PublishingImages/icons/{{ x.category.icon}}-{{ x.category.color }}.png" alt="icon">
           <span class="card-title">{{ x.title }}</span>
@@ -27,6 +36,7 @@
           <span data-ng-bind-html="x.content | renderHTMLCorrectly"></span>
           <span class="card-date">{{ x.publishDate | date: 'MMM dd, yyyy'}}</span>
         </div>
+
       </div>
 
     </div>

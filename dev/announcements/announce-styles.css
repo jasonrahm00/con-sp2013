@@ -1,3 +1,24 @@
+.load-message {
+  display: table;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+
+.load-message > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.load-message p {
+  color: #565a5c;
+  font-weight: bold;
+}
+
+.spinner {
+  margin: 0 auto;
+}
+
 /***************************************************
   Card Styles
 ***************************************************/
