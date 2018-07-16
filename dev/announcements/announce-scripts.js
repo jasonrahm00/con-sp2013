@@ -129,6 +129,15 @@ angular.module("announcements", [])
 
     var deferred = $q.defer();
 
+    function addDay(x) {
+      if (x !== null) {
+        var spDate = new Date(x);
+        return spDate.setDate(spDate.getDate() + 1);
+      } else {
+        return null;
+      }
+    }
+
     // Get function that retrieves data from Internal Annoucements list
     return $http.get("https://mycon.ucdenver.edu/_vti_bin/listdata.svc/InternalAnnouncements")
       .then(function(response) {
@@ -149,12 +158,13 @@ angular.module("announcements", [])
             if ((publishDate === null || publishDate < now) && (expireDate === null || expireDate > now)) {
 
               // Create data object for each result
+                // publishDate arrow function adds 1 day to publish date because SP is jacked up
               var dataItem = {
                 "title": value.Announcement,
                 "category": getCategory(value.CategoryValue),
                 "content": value.Description,
                 "expires": expireDate,
-                "publishDate": publishDate
+                "publishDate": addDay(publishDate)
               };
 
               // Check to see if widget is loaded on HR page
